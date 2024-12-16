@@ -7,9 +7,9 @@ export default function Home() {
   return (
     <main>
       <HeroBanner />
-      <ProductsCarousel title="NOUVEAUTÉS" />
-      <PromotionBanner />
       <ProductsCarousel title="PROMOTIONS" />
+      <PromotionBanner />
+      <ProductsCarousel title="NOUVEAUTÉS" />
       <SkinProfileBanner />
       <ProductsCarousel title="BEST SELLERS" />
     </main>
