@@ -16,8 +16,16 @@ export default function Header() {
         </div>
 
         {/* Center logo */}
-        <div className="flex flex-1 justify-center">
-          <Image width={156} height={120} alt="logo" src="/logo.svg" />
+        <div className="flex justify-center">
+          <div className="h-full">
+            <Image
+              width={156}
+              height={64}
+              className="mb-2"
+              alt="logo"
+              src="/logo.svg"
+            />
+          </div>
         </div>
 
         {/* Right group */}
