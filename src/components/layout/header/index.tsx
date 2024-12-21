@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
-import { Menu, Search, ShoppingBag, User } from "lucide-react";
+import { Search, ShoppingBag, User } from "lucide-react";
 import { MenuSheet } from "./menu-sheet";
+import Image from "next/image";
 
 export default function Header() {
   return (
@@ -16,7 +17,7 @@ export default function Header() {
 
         {/* Center logo */}
         <div className="flex flex-1 justify-center">
-          <h1 className="font-bold text-xl">LOGO</h1>
+          <Image width={156} height={120} alt="logo" src="/logo.svg" />
         </div>
 
         {/* Right group */}

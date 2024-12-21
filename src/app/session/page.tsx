@@ -7,13 +7,12 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import Image from "next/image";
 
 export default function Session() {
   return (
     <div className="flex flex-col px-12 md:mx-auto md:max-w-[525px]">
-      <div className="mx-auto my-10 flex aspect-square w-36 items-center justify-center bg-zinc-900 text-white lg:my-14">
-        <p>LOGO</p>
-      </div>
+      <Image width={400} height={400} alt="logo" src="/logo.svg" />
       <h1 className="font-bold text-2xl">OUVRIR UNE SESSION</h1>
       <p className="mt-2 text-pretty text-sm text-zinc-500">
         Pour voir vos commandes et leurs suivis, votre liste de souhaits, et
