@@ -4,7 +4,7 @@ import { MenuSheet } from "./menu-sheet";
 
 export default function Header() {
   return (
-    <header className="container mx-auto px-4">
+    <header className=" mx-auto px-4">
       <nav className="flex h-16 items-center justify-between">
         {/* Left group */}
         <div className="flex items-center gap-2">

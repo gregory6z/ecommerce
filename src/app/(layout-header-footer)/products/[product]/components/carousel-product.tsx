@@ -11,9 +11,10 @@ export function CarouselProduct() {
     <Carousel
       opts={{
         align: "center",
+        containScroll: "trimSnaps",
       }}
     >
-      <CarouselContent className="-ml-1">
+      <CarouselContent className="-ml-1 [&>*]:max-w-[324px]">
         {[1, 2, 3, 4, 5, 6].map((item) => (
           <CarouselItem
             key={item}

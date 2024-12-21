@@ -1,16 +1,18 @@
+import CategoriesCarousel from "./components/carousels/categories-carousel";
 import HeroBanner from "./components/hero-banner";
 import ProductsCarousel from "./components/products-carousel";
-import PromotionBanner from "./components/promotion-banner";
-import SkinProfileBanner from "./components/skin-profile-banner";
 
 export default function Home() {
   return (
     <main>
       <HeroBanner />
       <ProductsCarousel title="PROMOTIONS" />
-      <PromotionBanner />
-      <ProductsCarousel title="NOUVEAUTÉS" />
-      <SkinProfileBanner />
+      <CategoriesCarousel />
+      {/* <PromotionBanner /> */}
+      {/* <ProductsCarousel title="NOUVEAUTÉS" /> */}
+      <HeroBanner />
+
+      {/* <SkinProfileBanner /> */}
       <ProductsCarousel title="BEST SELLERS" />
     </main>
   );
