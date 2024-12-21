@@ -7,12 +7,11 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import Image from "next/image";
 
 export default function Session() {
   return (
-    <div className="flex min-h-screen flex-col justify-center px-12">
-      <div className="mx-auto mb-10 flex aspect-square w-36 items-center justify-center bg-zinc-900 text-white">
+    <div className="flex max-h-screen flex-col justify-center px-12">
+      <div className="mx-auto my-10 flex aspect-square w-36 items-center justify-center bg-zinc-900 text-white">
         <p>LOGO</p>
       </div>
       <h1 className="font-bold text-2xl">OUVRIR UNE SESSION</h1>
