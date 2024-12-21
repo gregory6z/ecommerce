@@ -1,9 +1,9 @@
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Heart, ShoppingBag, Star } from "lucide-react";
-import { RatingDisplay } from "../ui/rating";
 import { AspectRatio } from "@radix-ui/react-aspect-ratio";
 import { Button } from "../ui/button";
 import { PingButton } from "../ui/pint-button";
+import Image from "next/image";
 
 export function ProductCard() {
   return (
@@ -11,6 +11,13 @@ export function ProductCard() {
       <CardHeader>
         <AspectRatio ratio={6 / 7} className="relative">
           <div className="flex h-full w-full bg-zinc-200">
+            <Image
+              src="/foto.webp"
+              className="-mt-4 object-cover object-[center_20%]"
+              alt="Product image"
+              fill
+              priority
+            />
             <PingButton>
               <ShoppingBag />
             </PingButton>
