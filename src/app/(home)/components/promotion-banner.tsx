@@ -8,7 +8,7 @@ import {
 
 export default function PromotionBanner() {
   return (
-    <div className="mt-2 bg-zinc-100 py-6">
+    <div className="mt-2py-6">
       <AspectRatio ratio={1} className=" md:aspect-[16/9]">
         <div className="flex h-full w-full items-center justify-center bg-zinc-900">
           {/* Conteúdo futuro aqui */}

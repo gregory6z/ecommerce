@@ -16,7 +16,7 @@ export default function Header() {
 
         {/* Center logo */}
         <div className="flex flex-1 justify-center">
-          <h1 className="font-bold text-xl">VA BEAUTY</h1>
+          <h1 className="font-bold text-xl">LOGO</h1>
         </div>
 
         {/* Right group */}
