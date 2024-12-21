@@ -8,7 +8,7 @@ export default function Header() {
     <header className=" mx-auto px-4">
       <nav className="flex h-16 items-center justify-between">
         {/* Left group */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-start gap-2">
           <MenuSheet />
           <Button variant="ghost" size="icon">
             <Search className="h-6 w-6" />
@@ -17,12 +17,13 @@ export default function Header() {
 
         {/* Center logo */}
         <div className="flex justify-center">
-          <div className="h-full">
+          <div className="max-h-[40px]">
             <Image
-              width={156}
-              height={64}
-              className="mb-2"
+              width={120}
+              height={40}
               alt="logo"
+              priority
+              className="h-full object-cover object-center"
               src="/logo.svg"
             />
           </div>
