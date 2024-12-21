@@ -12,7 +12,14 @@ import Image from "next/image";
 export default function Session() {
   return (
     <div className="flex flex-col px-12 md:mx-auto md:max-w-[525px]">
-      <Image width={400} height={400} alt="logo" src="/logo.svg" />
+      <Image
+        className=" mt-20 mb-12 w-full"
+        width={400}
+        height={400}
+        alt="logo"
+        src="/logo.svg"
+      />
+
       <h1 className="font-bold text-2xl">OUVRIR UNE SESSION</h1>
       <p className="mt-2 text-pretty text-sm text-zinc-500">
         Pour voir vos commandes et leurs suivis, votre liste de souhaits, et
