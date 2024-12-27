@@ -33,9 +33,11 @@ export default function Header() {
 
         {/* Right group */}
         <div className="flex items-center gap-2">
-          <Button variant="ghost" size="icon">
-            <User className="h-6 w-6" />
-          </Button>
+          <Link href="/session">
+            <Button variant="ghost" size="icon">
+              <User className="h-6 w-6" />
+            </Button>
+          </Link>
           <Button variant="ghost" size="icon">
             <ShoppingBag className="h-6 w-6" />
           </Button>

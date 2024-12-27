@@ -8,8 +8,17 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Image from "next/image";
+import { ButtonSignin } from "./components/button-signin";
+import { auth } from "@/lib/auth";
+import { redirect } from "next/navigation";
 
-export default function Session() {
+export default async function Session() {
+  const session = await auth();
+
+  if (session) {
+    redirect("/account");
+  }
+
   return (
     <div className="flex flex-col px-12 md:mx-auto md:max-w-[525px]">
       <Image
@@ -33,13 +42,7 @@ export default function Session() {
       </div>
       <p className="py-4 text-center">ou</p>
       <div>
-        <Button variant={"outline"} className="mt-2 flex w-full ">
-          <div className="flex w-48 items-center gap-4">
-            <GoogleIcon className="shrink-0" />
-
-            <span>Entrar com Google</span>
-          </div>
-        </Button>
+        <ButtonSignin />
         <Button variant={"outline"} className="mt-2 w-full">
           <div className="flex w-48 items-center gap-4">
             <FacebookIcon className="shrink-0" />
