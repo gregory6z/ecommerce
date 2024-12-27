@@ -17,7 +17,7 @@ export default function DrawerButton() {
   return (
     <Drawer.Root>
       <DrawerTrigger asChild>
-        <Button variant="secondary">
+        <Button className="mt-4 md:hidden" variant="secondary">
           {" "}
           <SlidersHorizontal />
           FILTRER ET TRIER

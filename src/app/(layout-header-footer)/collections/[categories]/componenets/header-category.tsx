@@ -10,7 +10,7 @@ export default function HeaderCategory({
   numberOfProducts,
 }: HeaderCategoryProps) {
   return (
-    <header className="mt-6 flex flex-col gap-4 px-4">
+    <header className="mt-6 flex flex-col gap-4 px-4 lg:hidden">
       <div className="flex flex-col">
         <h1 className="font-bold text-xl">{title}</h1>
         <p>{numberOfProducts} produits</p>

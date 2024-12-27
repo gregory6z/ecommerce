@@ -4,17 +4,36 @@ import { AspectRatio } from "@radix-ui/react-aspect-ratio";
 import { Button } from "../ui/button";
 import { PingButton } from "../ui/pint-button";
 import Image from "next/image";
+import { formatEUR } from "@/lib/utils";
 
-export function ProductCard() {
+interface ProductCardProps {
+  title: string;
+  price: string;
+  description: string;
+  imageUrl: string;
+  imageAlt: string;
+  tags: string[];
+  compareAtPrice?: string;
+}
+
+export function ProductCard({
+  title,
+  description,
+  price,
+  imageUrl,
+  imageAlt,
+  tags,
+  compareAtPrice,
+}: ProductCardProps) {
   return (
     <Card className="h-full">
       <CardHeader>
         <AspectRatio ratio={6 / 7} className="relative">
           <div className="flex h-full w-full bg-zinc-200">
             <Image
-              src="/foto.webp"
-              className="-mt-4 object-cover object-[center_20%]"
-              alt="Product image"
+              src={imageUrl}
+              className="-mt-4 object-cover"
+              alt={imageAlt}
               fill
               priority
             />
@@ -29,9 +48,25 @@ export function ProductCard() {
           >
             <Heart />
           </Button>
-          <span className="absolute bottom-2 left-2 rounded-sm bg-white px-2 py-1 font-bold text-xs">
-            NOUVEAU
-          </span>
+
+          {compareAtPrice && Number(compareAtPrice) > 0 ? (
+            <span className="absolute bottom-2 left-2 rounded-sm bg-white px-2 py-1 font-bold text-xs uppercase">
+              {`Reduction ${Math.max(
+                0,
+                Math.round(
+                  ((Number(compareAtPrice) - Number(price)) /
+                    Number(compareAtPrice)) *
+                    100,
+                ),
+              )}%`}
+            </span>
+          ) : (
+            tags?.length > 0 && (
+              <span className="absolute bottom-2 left-2 rounded-sm bg-white px-2 py-1 font-bold text-xs uppercase">
+                {tags[0]}
+              </span>
+            )
+          )}
         </AspectRatio>
       </CardHeader>
 
@@ -40,9 +75,17 @@ export function ProductCard() {
           <Star width={12} height={14} strokeWidth={1} fill="currentColor" />
           <strong className="text-xs">4.5</strong>
         </div>
-        <h2 className="mt-1 text-pretty">Crème réparatrice pour les pieds</h2>
-        <p className="text-zinc-500 ">Menthe et eucalyptus </p>
-        <h3 className=" font-bold ">$99.99</h3>
+        <h2 className="mt-1 text-pretty">{title}</h2>
+        <p className="text-zinc-500 ">{description} </p>
+        <div className="flex gap-2">
+          {" "}
+          <h3 className=" font-bold ">{formatEUR(price)}</h3>
+          {compareAtPrice && Number(compareAtPrice) > 0 && (
+            <h3 className="text-red-600 line-through">
+              {formatEUR(compareAtPrice)}
+            </h3>
+          )}
+        </div>
       </CardContent>
     </Card>
   );

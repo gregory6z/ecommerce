@@ -10,8 +10,8 @@
       "recommended": true,
 
       "style": {
-        
-        "noNonNullAssertion": "error",
+        "useImportType":"error",
+        "noNonNullAssertion": "off",
         "noUnusedTemplateLiteral": "error",
         "noUselessElse": "off",
         "useBlockStatements": "error",
