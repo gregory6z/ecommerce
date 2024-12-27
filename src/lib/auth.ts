@@ -1,6 +1,5 @@
 import NextAuth from "next-auth";
 import Google from "next-auth/providers/google";
-import { shopifySync } from "./shopify-sync";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [Google],
@@ -19,8 +18,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     async session({ session, token }) {
       if (session.user) {
         // Adiciona informações do token à sessão, se necessário
-        session.user.email = token.email;
-        session.user.name = token.name;
+        session.user.email = token.email ?? "email@example.com"; // Valor padrão se token.email for null ou undefined
+        session.user.name = token.name ?? "Nome Desconhecido";
       }
       return session;
     },
