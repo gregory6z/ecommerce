@@ -2,15 +2,15 @@ import * as React from "react"
 import { cn } from "@/lib/utils"
 import { Button } from "./button"
 
-export function PingButton({ 
-  children, 
-  className,
-}: {
-  children: React.ReactNode
-  className?: string
-}) {
+interface PingButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  classname?: string
+}
+
+
+export function PingButton({ children, className, ...props }: PingButtonProps) {
   return (
     <Button
+    {...props}
       variant="rounded"
       size="iconSm"
       className={cn(

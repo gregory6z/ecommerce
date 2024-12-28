@@ -1,10 +1,10 @@
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { Heart, ShoppingBag, Star } from "lucide-react";
+import { Heart, Star } from "lucide-react";
 import { AspectRatio } from "@radix-ui/react-aspect-ratio";
 import { Button } from "../ui/button";
-import { PingButton } from "../ui/pint-button";
 import Image from "next/image";
 import { formatEUR } from "@/lib/utils";
+import { QuickAddToCartDrawer } from "../layout/cart/quick-add-to-cart-drawer";
 
 interface ProductCardProps {
   title: string;
@@ -37,9 +37,14 @@ export function ProductCard({
               fill
               priority
             />
-            <PingButton>
-              <ShoppingBag />
-            </PingButton>
+            <QuickAddToCartDrawer
+              compareAtPrice={compareAtPrice}
+              name={title}
+              description={description}
+              price={price}
+              imageUrl={imageUrl}
+              imageAlt={imageAlt}
+            />
           </div>
           <Button
             variant={"rounded"}
