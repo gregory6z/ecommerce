@@ -45,10 +45,10 @@ export function QuickAddToCartDrawer({
 
         <main className="mt-4 px-4">
           <section className="mb-4 flex gap-2">
-            <div className="flex h-[146px] w-[120px] bg-zinc-200">
+            <div className=" h-[146] w-[128] bg-zinc-200">
               <Image
                 src={imageUrl}
-                className="-mt-4 object-cover"
+                className="h-full w-full object-cover"
                 alt={imageAlt}
                 width={120}
                 height={146}
