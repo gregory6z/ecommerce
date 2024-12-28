@@ -13,79 +13,93 @@ import { ShoppingBag } from "lucide-react";
 import { Drawer } from "vaul";
 import Image from "next/image";
 import { formatEUR } from "@/lib/utils";
+import type { Product } from "@/http/products";
+import { CartDrawer } from "./cart-drawer";
+import { useState } from "react";
 
-interface QuickAddToCartDrawerProps {
-  name: string;
-  description: string;
-  price: string;
-  imageUrl: string;
-  imageAlt: string;
-  compareAtPrice?: string;
-}
+export function QuickAddToCartDrawer({ product }: { product: Product }) {
+  const [isQuickAddOpen, setQuickAddOpen] = useState(false);
+  const [isCartDrawerOpen, setCartDrawerOpen] = useState(false);
 
-export function QuickAddToCartDrawer({
-  name,
-  description,
-  price,
-  imageUrl,
-  imageAlt,
-  compareAtPrice,
-}: QuickAddToCartDrawerProps) {
+  const openCartDrawer = () => {
+    setCartDrawerOpen(true);
+  };
+
+  const handleAddToCart = () => {
+    // Close the drawer first
+    setQuickAddOpen(false);
+
+    openCartDrawer();
+
+    // Perform the cart action
+    console.log("Product added to cart:", product);
+  };
+
   return (
-    <Drawer.Root>
-      <DrawerTrigger asChild>
-        <PingButton className="md:hidden">
-          <ShoppingBag />
-        </PingButton>
-      </DrawerTrigger>
-      <DrawerContent>
-        <DrawerHeader>
-          <DrawerTitle className="uppercase">Ajout Rapid</DrawerTitle>
-        </DrawerHeader>
+    <div>
+      <Drawer.Root open={isQuickAddOpen} onOpenChange={setQuickAddOpen}>
+        <DrawerTrigger asChild>
+          <PingButton className="md:hidden">
+            <ShoppingBag />
+          </PingButton>
+        </DrawerTrigger>
+        <DrawerContent>
+          <DrawerHeader>
+            <DrawerTitle className="uppercase">Ajout Rapid</DrawerTitle>
+          </DrawerHeader>
 
-        <main className="mt-4 px-4">
-          <section className="mb-4 flex gap-2">
-            <div className=" h-[146] w-[128] bg-zinc-200">
-              <Image
-                src={imageUrl}
-                className="h-full w-full object-cover"
-                alt={imageAlt}
-                width={120}
-                height={146}
-                priority
-              />
-            </div>
+          <main className="mt-4 px-4">
+            <section className="mb-4 flex gap-2">
+              <div className=" h-[146] w-[128] bg-zinc-200">
+                <Image
+                  src={product.images[0].url}
+                  className="h-full w-full object-cover"
+                  alt={product.images[0].altText}
+                  width={120}
+                  height={146}
+                  priority
+                />
+              </div>
 
-            {/* <Image
+              {/* <Image
                 src={"/"}
                 className="-mt-4 object-cover"
                 alt={"image"}
                 fill
                 priority
               /> */}
-            <div className="mt-2">
-              <h2 className=" ">{name}</h2>
-              <p className="text-zinc-500">{description}</p>
-              <div className="flex gap-2">
-                {" "}
-                <h3 className=" font-bold ">{formatEUR(price)}</h3>
-                {compareAtPrice && Number(compareAtPrice) > 0 && (
-                  <h3 className="text-red-600 line-through">
-                    {formatEUR(compareAtPrice)}
+              <div className="mt-2">
+                <h2 className=" ">{product.title}</h2>
+                <p className="text-zinc-500">{product.description}</p>
+                <div className="flex gap-2">
+                  {" "}
+                  <h3 className=" font-bold ">
+                    {formatEUR(product.price.amount)}
                   </h3>
-                )}
+                  {product.compareAtPrice?.amount &&
+                    Number(product.price.amount) > 0 && (
+                      <h3 className="text-red-600 line-through">
+                        {formatEUR(product.price.amount)}
+                      </h3>
+                    )}
+                </div>
               </div>
-            </div>
-          </section>
-        </main>
+            </section>
+          </main>
 
-        <DrawerFooter>
-          <Button>Ajouter</Button>
-          <DrawerClose asChild>
-            <Button variant="outline">Cancel</Button>
-          </DrawerClose>
-        </DrawerFooter>
-      </DrawerContent>
-    </Drawer.Root>
+          <DrawerFooter>
+            <Button onClick={handleAddToCart}>Ajouter</Button>
+
+            <DrawerClose asChild>
+              <Button variant="outline">Cancel</Button>
+            </DrawerClose>
+          </DrawerFooter>
+        </DrawerContent>
+      </Drawer.Root>
+
+      <Drawer.Root open={isCartDrawerOpen} onOpenChange={setCartDrawerOpen}>
+        <CartDrawer product={product} />
+      </Drawer.Root>
+    </div>
   );
 }

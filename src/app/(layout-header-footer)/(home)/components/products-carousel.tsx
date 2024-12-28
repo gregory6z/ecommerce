@@ -48,15 +48,7 @@ export default function ProductsCarousel({
               key={product.id}
               className="max-w-[324px] basis-[80%] pl-2 sm:basis-1/2 md:basis-1/4 lg:basis-1/4"
             >
-              <ProductCard
-                title={product.title}
-                price={product.price.amount}
-                compareAtPrice={product.compareAtPrice?.amount}
-                description={product.description}
-                imageUrl={product.images[0].url}
-                imageAlt={product.images[0].altText}
-                tags={product.tags}
-              />
+              <ProductCard key={product.id} product={product} />
             </CarouselItem>
           ))}
         </CarouselContent>
