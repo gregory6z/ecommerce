@@ -13,7 +13,7 @@ import { CartContent } from "./cart-content";
 
 export function CartDrawer({ product }: { product: Product }) {
   return (
-    <DrawerContent className="h-[90vh]">
+    <DrawerContent className="h-[80vh]">
       <DrawerHeader>
         <DrawerTitle className="uppercase">Votre Panier</DrawerTitle>
       </DrawerHeader>
