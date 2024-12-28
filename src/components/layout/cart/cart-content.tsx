@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import type { Product } from "@/http/products";
 import { formatEUR } from "@/lib/utils";
-import { ArrowDown, ChevronDown, Heart, Trash } from "lucide-react";
+import { ChevronDown, Heart, Trash } from "lucide-react";
 import Image from "next/image";
 
 interface CardContentProps {

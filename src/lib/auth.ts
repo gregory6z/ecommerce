@@ -2,15 +2,10 @@ import NextAuth from "next-auth";
 import Google from "next-auth/providers/google";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
-  providers: [Google],
+  providers: [Google as any],
   callbacks: {
-    async signIn({ user, account, profile }) {
+    async signIn() {
       // Exibe os dados do usuário autenticado no console
-      console.log("Dados do usuário autenticado pelo Google:", {
-        email: profile?.email,
-        name: profile?.name,
-        picture: profile?.picture,
-      });
 
       // Permite o login
       return true;
