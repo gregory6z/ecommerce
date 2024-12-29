@@ -26,14 +26,14 @@ export function CategoryCard({
   imageUrl,
 }: CategoryCardProps) {
   return (
-    <Card className="h-full">
+    <Card className="flex h-full flex-col">
       <CardHeader>
-        <AspectRatio ratio={6 / 7} className="relative">
+        <AspectRatio ratio={6 / 8} className="relative">
           <div className="flex h-full w-full bg-zinc-200">
             {imageUrl && (
               <Image
                 src={imageUrl}
-                className="-mt-4 object-cover object-[center_20%]"
+                className="object-cover"
                 alt={imageAlt || ""}
                 fill
                 priority
@@ -43,14 +43,16 @@ export function CategoryCard({
         </AspectRatio>
       </CardHeader>
 
-      <CardContent className="text-sm ">
-        <CardTitle className="mt-4 text-pretty">{title}</CardTitle>
-        <CardDescription className="mt-4 text-zinc-500 ">
-          {description}
-        </CardDescription>
+      <CardContent className="flex flex-grow flex-col justify-between text-sm">
+        <div>
+          <CardTitle className="mt-4 text-pretty">{title}</CardTitle>
+          <CardDescription className="mt-4 text-zinc-500">
+            {description}
+          </CardDescription>
+        </div>
       </CardContent>
-      <CardFooter>
-        {" "}
+
+      <CardFooter className="mt-auto">
         <Link
           href={`/collections/${slug}`}
           className="flex items-center gap-2 font-bold text-primary underline hover:underline"

@@ -6,8 +6,7 @@ import Image from "next/image";
 import { formatEUR } from "@/lib/utils";
 import { QuickAddToCartDrawer } from "../layout/cart/quick-add-to-cart-drawer";
 
-// biome-ignore lint/style/useImportType: <explanation>
-import { Product } from "@/http/products";
+import type { Product } from "@/http/products";
 
 export function ProductCard({ product }: { product: Product }) {
   return (
