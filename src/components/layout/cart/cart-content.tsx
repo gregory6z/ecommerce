@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/hooks/use-cart";
 import { formatEUR } from "@/lib/utils";
@@ -7,8 +9,6 @@ import { QuantityComboBox } from "./quantity-combo-box";
 
 export function CartContent() {
   const { cart, removeFromCart } = useCart();
-
-  console.log(cart);
 
   const handleRemoveFromCart = (lineId: string) => {
     removeFromCart.mutate(lineId);
