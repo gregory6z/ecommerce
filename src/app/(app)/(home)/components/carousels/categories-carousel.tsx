@@ -20,7 +20,7 @@ export default function CategoriesCarousel({
   }
 
   return (
-    <section className=" mt-8 mb-10 pl-4 md:mt-12 md:mb-14 md:pl-8 lg:mt-24 lg:mb-40 lg:pl-16">
+    <section className=" mt-12 mb-24 pl-4 md:mt-12 md:mb-14 md:pl-8 lg:mt-24 lg:mb-40 lg:pl-16">
       <Carousel
         opts={{
           align: "start",

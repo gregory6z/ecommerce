@@ -17,7 +17,7 @@ export function ProductCard({ product }: { product: Product }) {
           <div className="flex h-full w-full bg-zinc-200">
             <Image
               src={product.images[0].url}
-              className="-mt-4 object-cover"
+              className=" object-cover"
               alt={product.images[0].altText}
               fill
               priority
