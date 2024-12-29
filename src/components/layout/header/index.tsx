@@ -1,8 +1,9 @@
 import { Button } from "@/components/ui/button";
-import { Search, ShoppingBag, User } from "lucide-react";
+import { Search, User } from "lucide-react";
 import { MenuSheet } from "./menu-sheet";
 import Image from "next/image";
 import Link from "next/link";
+import { ShoppingBagButton } from "./shopping-bag-button";
 
 export default function Header() {
   return (
@@ -38,9 +39,7 @@ export default function Header() {
               <User className="h-6 w-6" />
             </Button>
           </Link>
-          <Button variant="ghost" size="icon">
-            <ShoppingBag className="h-6 w-6" />
-          </Button>
+          <ShoppingBagButton />
         </div>
       </nav>
     </header>

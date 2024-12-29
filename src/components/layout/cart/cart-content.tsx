@@ -81,7 +81,7 @@ export function CartContent() {
           );
         })}
 
-        <div className="mt-4 flex flex-col gap-2 border-zinc-200 border-b pb-4 ">
+        <div className="mt-8 flex flex-col gap-2 border-zinc-200 border-b pb-8 ">
           <div className="flex justify-between">
             <p>Total</p>
             <p>{cart?.total.amount ? formatEUR(cart.total.amount) : ""}</p>

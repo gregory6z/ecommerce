@@ -12,12 +12,14 @@ import { CartContent } from "./cart-content";
 
 export function CartDrawer() {
   return (
-    <DrawerContent className="h-[80vh]">
-      <DrawerHeader>
+    <DrawerContent className="flex h-[80vh] flex-col">
+      <DrawerHeader className="flex-shrink-0">
         <DrawerTitle className="uppercase">Votre Panier</DrawerTitle>
       </DrawerHeader>
 
-      <CartContent />
+      <div className="flex-grow overflow-y-auto">
+        <CartContent />
+      </div>
 
       <DrawerFooter className="mt-4">
         <Button variant={"third"} size={"lg"}>
