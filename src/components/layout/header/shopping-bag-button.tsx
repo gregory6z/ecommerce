@@ -49,9 +49,7 @@ export function ShoppingBagButton() {
         </Button>
       </div>
 
-      <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
-        <CartSheet />
-      </Sheet>
+      <CartSheet open={isSheetOpen} onOpenChange={setIsSheetOpen} />
 
       <Drawer.Root open={isDrawerOpen} onOpenChange={setIsDrawerOpen}>
         <CartDrawer />
