@@ -28,7 +28,7 @@ export interface Product {
     url: string;
     altText: string;
   }[];
-  variants?: ProductVariant[];
+  variants: ProductVariant[];
   price: {
     amount: string;
     currencyCode: string;

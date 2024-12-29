@@ -16,25 +16,30 @@ import { formatEUR } from "@/lib/utils";
 import type { Product } from "@/http/products";
 import { CartDrawer } from "./cart-drawer";
 import { useState } from "react";
+import { useCart } from "@/hooks/use-cart";
 
 export function QuickAddToCartDrawer({ product }: { product: Product }) {
   const [isQuickAddOpen, setQuickAddOpen] = useState(false);
   const [isCartDrawerOpen, setCartDrawerOpen] = useState(false);
+
+  const { addToCart } = useCart();
 
   const openCartDrawer = () => {
     setCartDrawerOpen(true);
   };
 
   const handleAddToCart = () => {
+    addToCart.mutate({
+      variantId: product.variants[0].id,
+      quantity: 1,
+    });
     // Close the drawer first
     setQuickAddOpen(false);
 
     openCartDrawer();
 
     // Perform the cart action
-    console.log("Product added to cart:", product);
   };
-
   return (
     <div>
       <Drawer.Root open={isQuickAddOpen} onOpenChange={setQuickAddOpen}>
@@ -72,14 +77,14 @@ export function QuickAddToCartDrawer({ product }: { product: Product }) {
                 <h2 className=" ">{product.title}</h2>
                 <p className="text-zinc-500">{product.description}</p>
                 <div className="flex gap-2">
-                  {" "}
-                  <h3 className=" font-bold ">
+                  <h3 className="font-bold">
                     {formatEUR(product.price.amount)}
                   </h3>
-                  {product.compareAtPrice?.amount &&
+                  {product.compareAtPrice?.amount !== undefined &&
+                    Number(product.compareAtPrice.amount) > 0 &&
                     Number(product.price.amount) > 0 && (
                       <h3 className="text-red-600 line-through">
-                        {formatEUR(product.price.amount)}
+                        {formatEUR(product.compareAtPrice.amount)}
                       </h3>
                     )}
                 </div>
@@ -98,7 +103,7 @@ export function QuickAddToCartDrawer({ product }: { product: Product }) {
       </Drawer.Root>
 
       <Drawer.Root open={isCartDrawerOpen} onOpenChange={setCartDrawerOpen}>
-        <CartDrawer product={product} />
+        <CartDrawer />
       </Drawer.Root>
     </div>
   );
