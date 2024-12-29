@@ -7,6 +7,7 @@ export interface CartItem extends Product {
   cartId: string; // ID do carrinho inteiro
   lineId: string; // ID único da linha no carrinho
   quantity: number; // Quantidade do item
+  quantityAvailable: number; // Adicionado aqui
   variantId: string; // ID da variante selecionada
   image: {
     url: string;

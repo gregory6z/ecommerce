@@ -73,6 +73,7 @@ export function CartContent() {
                   <QuantityComboBox
                     lineId={product.lineId}
                     quantity={product.quantity}
+                    quantityAvailable={product.quantityAvailable}
                   />
                 </div>
               </div>

@@ -119,6 +119,7 @@ export async function GET() {
         description: node.merchandise.product.description,
         tags: node.merchandise.product.tags,
         availableForSale: node.merchandise.quantityAvailable > 0,
+        quantityAvailable: node.merchandise.quantityAvailable, // Adicionado aqui
         image: node.merchandise.image,
         price: node.merchandise.price,
         compareAtPrice: node.merchandise.compareAtPrice,

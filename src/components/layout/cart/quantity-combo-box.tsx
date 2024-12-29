@@ -21,9 +21,14 @@ import { useCart } from "@/hooks/use-cart";
 interface QuantityComboBoxProps {
   quantity: number;
   lineId: string;
+  quantityAvailable: number;
 }
 
-export function QuantityComboBox({ quantity, lineId }: QuantityComboBoxProps) {
+export function QuantityComboBox({
+  quantity,
+  lineId,
+  quantityAvailable,
+}: QuantityComboBoxProps) {
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState<number>(quantity);
 
@@ -43,7 +48,9 @@ export function QuantityComboBox({ quantity, lineId }: QuantityComboBoxProps) {
     });
   };
 
-  const quantities = Array.from({ length: 10 }, (_, i) => i + 1);
+  const maxQuantity = Math.min(quantityAvailable, 10);
+
+  const quantities = Array.from({ length: maxQuantity }, (_, i) => i + 1);
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
