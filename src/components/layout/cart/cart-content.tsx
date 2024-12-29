@@ -15,15 +15,13 @@ export function CartContent() {
   };
 
   return (
-    <main className="mt-2 overflow-y-auto px-4 ">
+    <main className="mt-2 px-4">
       <section className="mb-4 flex flex-col">
-        {cart?.items.map((product, index) => {
-          return (
+        {cart?.items && cart.items.length > 0 ? (
+          cart.items.map((product) => (
             <div
-              // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
-              key={index}
-              // biome-ignore lint/nursery/useSortedClasses: <explanation>
-              className="flex gap-2 border-zinc-200 last:border-b-transparent border-b pt-4 pb-8"
+              key={product.id}
+              className="flex gap-2 border-zinc-200 border-b pt-4 pb-8 last:border-b-transparent"
             >
               <div className="h-[125px] w-[100px] bg-zinc-200">
                 <Image
@@ -50,7 +48,7 @@ export function CartContent() {
                       </h3>
                     )}
                 </div>
-                <div className="itens-center mt-2 flex gap-2">
+                <div className="mt-2 flex items-center gap-2">
                   <Button
                     className={"bg-zinc-100"}
                     variant={"rounded"}
@@ -67,9 +65,6 @@ export function CartContent() {
                     <Trash />
                   </Button>
 
-                  {/* <Button className="" variant={"ghost"}>
-                    Qte: {product.quantity} <ChevronDown width={12} />
-                  </Button> */}
                   <QuantityComboBox
                     lineId={product.lineId}
                     quantity={product.quantity}
@@ -78,23 +73,29 @@ export function CartContent() {
                 </div>
               </div>
             </div>
-          );
-        })}
+          ))
+        ) : (
+          <p className="mt-4 text-center text-zinc-500">
+            Seu carrinho está vazio.
+          </p>
+        )}
 
-        <div className="mt-8 flex flex-col gap-2 border-zinc-200 border-b pb-8 ">
-          <div className="flex justify-between">
-            <p>Total</p>
-            <p>{cart?.total.amount ? formatEUR(cart.total.amount) : ""}</p>
+        {cart?.items && cart.items.length > 0 && (
+          <div className="mt-8 flex flex-col gap-2 border-zinc-200 border-b pb-8">
+            <div className="flex justify-between">
+              <p>Total</p>
+              <p>{cart?.total.amount ? formatEUR(cart.total.amount) : ""}</p>
+            </div>
+            <div className="flex justify-between">
+              <p>Expedition standard</p>
+              <p>Gratuit</p>
+            </div>
+            <div className="flex justify-between font-bold">
+              <p>Total</p>
+              <p>{cart?.total.amount ? formatEUR(cart.total.amount) : ""}</p>
+            </div>
           </div>
-          <div className="flex justify-between">
-            <p>Expedition standard</p>
-            <p>Gratuit</p>
-          </div>
-          <div className="flex justify-between font-bold">
-            <p>Total</p>
-            <p>{cart?.total.amount ? formatEUR(cart.total.amount) : ""}</p>
-          </div>
-        </div>
+        )}
       </section>
     </main>
   );
