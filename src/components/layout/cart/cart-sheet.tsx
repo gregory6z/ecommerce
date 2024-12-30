@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/sheet";
 import { CartContent } from "./cart-content";
 import { Button } from "@/components/ui/button";
+import { CheckoutButton } from "./checkout-button";
 
 interface CartSheetProps {
   open: boolean;
@@ -27,9 +28,7 @@ export function CartSheet({ open, onOpenChange }: CartSheetProps) {
         </div>
 
         <SheetFooter className="mt-4">
-          <Button className="w-full" variant={"third"} size={"xl"}>
-            PAYEMENT SÉCURISE
-          </Button>
+          <CheckoutButton />
         </SheetFooter>
       </SheetContent>
     </Sheet>

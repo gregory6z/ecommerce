@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/drawer";
 
 import { CartContent } from "./cart-content";
+import { CheckoutButton } from "./checkout-button";
 
 export function CartDrawer() {
   return (
@@ -21,9 +22,7 @@ export function CartDrawer() {
       </div>
 
       <DrawerFooter className="mt-4">
-        <Button variant={"third"} size={"lg"}>
-          PAYEMENT SÉCURISE
-        </Button>
+        <CheckoutButton />
       </DrawerFooter>
     </DrawerContent>
   );

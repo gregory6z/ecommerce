@@ -13,13 +13,14 @@ export function ProductCard({ product }: { product: Product }) {
     <Card className="h-full">
       <CardHeader>
         <AspectRatio ratio={6 / 7} className="relative">
-          <div className="flex h-full w-full bg-zinc-200">
+          <div className="relative flex h-full w-full bg-zinc-200">
             <Image
               src={product.images[0].url}
               className=" object-cover"
-              alt={product.images[0].altText}
+              alt={product.images[0]?.altText || ""}
               fill
               priority
+              sizes="(max-width: 768px) 100vw, 33vw"
             />
             <QuickAddToCartDrawer product={product} />
           </div>

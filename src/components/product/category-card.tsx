@@ -29,13 +29,14 @@ export function CategoryCard({
     <Card className="flex h-full flex-col">
       <CardHeader>
         <AspectRatio ratio={6 / 8} className="relative">
-          <div className="flex h-full w-full bg-zinc-200">
+          <div className="relative flex h-full w-full bg-zinc-200">
             {imageUrl && (
               <Image
                 src={imageUrl}
                 className="object-cover"
                 alt={imageAlt || ""}
                 fill
+                sizes="(max-width: 768px) 100vw, 33vw"
                 priority
               />
             )}

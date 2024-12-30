@@ -15,10 +15,6 @@ interface CategoriesCarouselProps {
 export default function CategoriesCarousel({
   categories,
 }: CategoriesCarouselProps) {
-  if (!categories || categories.length === 0) {
-    return null;
-  }
-
   return (
     <section className=" mt-12 mb-24 pl-4 md:mt-12 md:mb-14 md:pl-8 lg:mt-24 lg:mb-40 lg:pl-16">
       <Carousel
