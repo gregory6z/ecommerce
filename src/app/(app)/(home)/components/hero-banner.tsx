@@ -7,7 +7,7 @@ export default function HeroBanner() {
   return (
     <div>
       <div className="md:hidden">
-        <AspectRatio ratio={3 / 6} className="md:aspect-[16/9] ">
+        <AspectRatio ratio={3 / 4} className="md:aspect-[16/9] ">
           <div className="relative flex h-full w-full items-center justify-center bg-zinc-900">
             <Image
               src={"/o.jpg"}
