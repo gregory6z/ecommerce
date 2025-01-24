@@ -37,7 +37,7 @@ export default function Header() {
             </div>
           </Link>
 
-          <nav className="hidden gap-8 lg:flex">
+          <nav className="hidden lg:gap-4 xl:gap-8 lg:flex">
             <Link className="font-bold uppercase" href={"/"}>
               Skin care
             </Link>
@@ -53,16 +53,24 @@ export default function Header() {
             <Link className="font-bold uppercase" href={"/"}>
               Maquillage
             </Link>
-            <Link className="font-bold uppercase" href={"/"}>
+            <Link className="font-bold uppercase lg:hidden xl:block" href={"/"}>
               Parfums
             </Link>
           </nav>
 
           <div className="flex items-center gap-2 lg:gap-1">
-            <div className=" mr-4 hidden items-center justify-center gap-2 rounded-sm border border-zinc-200 bg-zinc-100 px-4 py-[0.75rem] lg:flex">
+            <div className=" mr-4 hidden items-center justify-center gap-2 rounded-sm border border-zinc-200 bg-zinc-100 px-4 py-[0.75rem] xl:flex">
               <Search />
               <p className="text-xs">Que cherche-tu aujourd’hui?...</p>
             </div>
+
+            <Button
+              className="hidden lg:block xl:hidden"
+              variant="ghost"
+              size="icon"
+            >
+              <Search className="h-6 w-6" />
+            </Button>
 
             <Link className="hidden lg:block" href="/session">
               <Button variant="ghost" size="icon">
