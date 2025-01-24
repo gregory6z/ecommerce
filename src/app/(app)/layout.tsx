@@ -1,4 +1,5 @@
 import Header from "@/components/layout/header";
+import { Usp } from "@/components/layout/usp";
 
 export default function LayoutWithHeader({
   children,
@@ -8,6 +9,7 @@ export default function LayoutWithHeader({
   return (
     <div>
       <Header />
+      <Usp />
       {children}
     </div>
   );

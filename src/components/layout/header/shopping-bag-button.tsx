@@ -39,7 +39,12 @@ export function ShoppingBagButton() {
         )}
       </Button>
       <div className="hidden md:flex">
-        <Button className="relative" variant="ghost" onClick={toggleSheet}>
+        <Button
+          className="relative"
+          size="icon"
+          variant="ghost"
+          onClick={toggleSheet}
+        >
           <ShoppingBag className="h-6 w-6" />
           {itemCount > 0 && (
             <span className="absolute top-0 right-2 inline-flex h-4 w-4 items-center justify-center rounded-full bg-sky-600 font-bold text-white text-xs">
