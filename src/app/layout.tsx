@@ -6,7 +6,7 @@ import { Providers } from "./providers";
 const montserrat = Montserrat({
   variable: "--font-montserrat-sans",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "700"],
+  weight: ["300", "400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {

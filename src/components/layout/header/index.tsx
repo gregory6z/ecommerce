@@ -15,7 +15,7 @@ export default function Header() {
           <p>Aide</p>
         </nav>
       </div>
-      <div className="mx-auto px-12">
+      <div className="mx-auto px-4 lg:px-12">
         <nav className="flex h-[4.375rem] items-center justify-between">
           <div className="flex items-start gap-2 lg:hidden">
             <MenuSheet />
@@ -37,7 +37,7 @@ export default function Header() {
             </div>
           </Link>
 
-          <nav className="hidden lg:gap-4 xl:gap-8 lg:flex">
+          <nav className="hidden lg:flex lg:gap-4 xl:gap-8">
             <Link className="font-bold uppercase" href={"/"}>
               Skin care
             </Link>
