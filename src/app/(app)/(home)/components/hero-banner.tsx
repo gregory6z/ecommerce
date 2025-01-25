@@ -17,7 +17,7 @@ export default function HeroBanner() {
               quality={100}
               className="h-full w-full object-cover "
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white opacity-75"></div>
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white opacity-75" />
           </div>
           <BannerTextOverlay />
         </AspectRatio>

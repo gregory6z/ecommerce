@@ -10,10 +10,8 @@ export function BannerTextOverlay() {
         Découvrez la beauté naturelle de votre peau avec notre gamme de soins,
         conçue pour nourrir et revitaliser votre éclat au quotidien.
       </p>
-      <p>
-        <p className=" mt-1 text-center md:hidden">
-          Révélez votre éclat naturel avec nos soins.
-        </p>
+      <p className=" mt-1 text-center md:hidden">
+        Révélez votre éclat naturel avec nos soins.
       </p>
       <Button size={"xl"} className="mt-4 lg:mt-6 lg:w-fit">
         DÉCOUVREZ NOS PRODUITS
