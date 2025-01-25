@@ -68,7 +68,7 @@ export async function getProducts({
       return [];
     }
 
-    return products.map((product: Product) => {
+    const combinedProducts = products.map((product: Product) => {
       const productPrices = prices.find(
         (price: any) => price.id === product.id,
       );
@@ -77,6 +77,8 @@ export async function getProducts({
         ...productPrices,
       };
     });
+
+    return combinedProducts;
   } catch (error) {
     console.error("Error fetching products:", error);
     return [];

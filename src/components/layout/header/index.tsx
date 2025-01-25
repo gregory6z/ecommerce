@@ -4,6 +4,7 @@ import { MenuSheet } from "./menu-sheet";
 import Image from "next/image";
 import Link from "next/link";
 import { ShoppingBagButton } from "./shopping-bag-button";
+import { SearchSheet } from "./search-sheet";
 
 export default function Header() {
   return (
@@ -21,9 +22,7 @@ export default function Header() {
         <nav className="flex h-[4.375rem] items-center justify-between">
           <div className="flex items-start gap-2 lg:hidden">
             <MenuSheet />
-            <Button variant="ghost" size="icon">
-              <Search className="h-6 w-6" />
-            </Button>
+            <SearchSheet />
           </div>
 
           <Link href="/" className="flex justify-center">

@@ -1,9 +1,9 @@
 import { ProductCard } from "@/components/product/product-card";
-import DrawerButton from "./componenets/drawer-button";
 import { getProducts, type Product } from "@/http/products";
 import BannerCategory from "./componenets/banner-category";
 import HeaderCategory from "./componenets/header-category";
 import SearchSidebar from "./componenets/search-sidebar";
+import SearchDrawer from "./componenets/search-drawer";
 
 export default async function Categories({
   params,
@@ -37,8 +37,8 @@ export default async function Categories({
         />
       </header>
       <main className="mt-4 px-4 lg:mt-14 lg:px-16 ">
-        <DrawerButton />
-        <section className="flex">
+        <SearchDrawer />
+        <section className="flex gap-10">
           <SearchSidebar />
           <div className=" mt-6 grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-4">
             {products.map((product: Product) => (

@@ -44,9 +44,9 @@ export function QuickAddToCartDrawer({ product }: { product: Product }) {
     <div>
       <Drawer.Root open={isQuickAddOpen} onOpenChange={setQuickAddOpen}>
         <DrawerTrigger asChild>
-          <PingButton className="md:hidden">
+          <Button size="iconSm" variant={"rounded"}>
             <ShoppingBag />
-          </PingButton>
+          </Button>
         </DrawerTrigger>
         <DrawerContent>
           <DrawerHeader>
