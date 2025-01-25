@@ -46,8 +46,10 @@ export function CategoryCard({
 
       <CardContent className="flex flex-grow flex-col justify-between text-sm">
         <div>
-          <CardTitle className="mt-4 text-pretty uppercase">{title}</CardTitle>
-          <CardDescription className="mt-4 text-zinc-500">
+          <CardTitle className="mt-4 text-pretty font-bold text-xl uppercase">
+            {title}
+          </CardTitle>
+          <CardDescription className="mt-4 text-zinc-800">
             {description}
           </CardDescription>
         </div>
