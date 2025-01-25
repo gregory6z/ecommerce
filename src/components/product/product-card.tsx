@@ -34,7 +34,7 @@ export function ProductCard({ product }: { product: Product }) {
 
           {product.compareAtPrice?.amount &&
           Number(product.compareAtPrice.amount) > 0 ? (
-            <span className="absolute bottom-2 left-2 rounded-sm bg-white px-2 py-1 font-bold text-xs uppercase">
+            <span className="absolute bottom-2 left-2 rounded-sm bg-zinc-900 px-2 py-1 font-bold text-xs uppercase">
               {`Reduction ${Math.max(
                 0,
                 Math.round(
