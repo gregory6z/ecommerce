@@ -27,7 +27,7 @@ export function CartContent() {
                 <Image
                   src={product.image.url}
                   className="h-full w-full object-cover"
-                  alt={product.image.altText}
+                  alt={product.image.altText || ""}
                   width={100}
                   height={125}
                   priority
@@ -50,7 +50,7 @@ export function CartContent() {
                 </div>
                 <div className="mt-2 flex items-center gap-2">
                   <Button
-                    className={"bg-zinc-100"}
+                    className={"bg-zinc-100 text-zinc-950"}
                     variant={"rounded"}
                     size={"iconMd"}
                   >
@@ -60,7 +60,7 @@ export function CartContent() {
                     onClick={() => handleRemoveFromCart(product.lineId)}
                     variant={"rounded"}
                     size={"iconMd"}
-                    className={"bg-zinc-100"}
+                    className={"bg-zinc-100 text-zinc-950"}
                   >
                     <Trash />
                   </Button>

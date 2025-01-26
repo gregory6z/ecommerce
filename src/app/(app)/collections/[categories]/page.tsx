@@ -38,7 +38,7 @@ export default async function Categories({
       </header>
       <main className="mt-4 px-4 lg:mt-14 lg:px-16 ">
         <SearchDrawer />
-        <section className="flex gap-10">
+        <section className="flex gap-4">
           <SearchSidebar />
           <div className=" mt-6 grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-4">
             {products.map((product: Product) => (

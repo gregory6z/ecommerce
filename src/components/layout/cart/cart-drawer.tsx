@@ -14,7 +14,7 @@ export function CartDrawer() {
   return (
     <DrawerContent className="flex h-[80vh] flex-col">
       <DrawerHeader className="flex-shrink-0">
-        <DrawerTitle className="uppercase">Votre Panier</DrawerTitle>
+        <DrawerTitle className="font-bold uppercase">Votre Panier</DrawerTitle>
       </DrawerHeader>
 
       <div className="flex-grow overflow-y-auto">

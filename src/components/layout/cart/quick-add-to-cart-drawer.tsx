@@ -53,7 +53,9 @@ export function QuickAddToCartDrawer({ product }: { product: Product }) {
         </DrawerTrigger>
         <DrawerContent>
           <DrawerHeader>
-            <DrawerTitle className="uppercase">Ajout Rapid</DrawerTitle>
+            <DrawerTitle className="font-bold uppercase">
+              Ajout Rapid
+            </DrawerTitle>
           </DrawerHeader>
 
           <main className="mt-4 px-4">
@@ -62,7 +64,7 @@ export function QuickAddToCartDrawer({ product }: { product: Product }) {
                 <Image
                   src={product.images[0].url}
                   className="h-full w-full object-cover"
-                  alt={product.images[0].altText}
+                  alt={product.images[0].altText || ""}
                   width={120}
                   height={146}
                   priority
