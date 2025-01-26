@@ -40,7 +40,7 @@ export default async function Categories({
         <SearchDrawer />
         <section className="flex gap-4">
           <SearchSidebar />
-          <div className=" mt-6 grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-4">
+          <div className=" mt-6 grid grid-cols-2 gap-2 sm:grid-cols-3 xl:grid-cols-4">
             {products.map((product: Product) => (
               <ProductCard key={product.id} product={product} />
             ))}
