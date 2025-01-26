@@ -54,7 +54,10 @@ export async function getProducts({
 
     const [productsResponse, pricesResponse] = await Promise.all([
       api(`/products${queryString ? `?${queryString}` : ""}`, {
-        cache: "no-store",
+        cache: "force-cache",
+        next: {
+          revalidate: 86400, // 24 horas em segundos
+        },
       }),
       api(`/products/prices${queryString ? `?${queryString}` : ""}`, {
         cache: "no-store",

@@ -1,3 +1,5 @@
+import type { Product } from "@/http/products";
+import { getRecommendations } from "@/http/recommendations";
 import type { CartItem } from "@/types/cart";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
@@ -27,6 +29,12 @@ export function useCart() {
     },
   });
 
+  const { data: recommendations } = useQuery<Product[]>({
+    queryKey: ["recommendations"],
+    queryFn: () => [],
+    enabled: false,
+  });
+
   const addToCart = useMutation({
     mutationFn: async ({
       variantId,
@@ -34,6 +42,7 @@ export function useCart() {
     }: {
       variantId: string;
       quantity: number;
+      productId: string;
     }) => {
       const response = await fetch("/api/cart", {
         method: "POST",
@@ -44,8 +53,10 @@ export function useCart() {
       // biome-ignore lint/style/useBlockStatements: <explanation>
       if (!response.ok) throw new Error("Failed to add to cart");
     },
-    onSuccess: () => {
+    onSuccess: async (_, { productId }) => {
       queryClient.invalidateQueries({ queryKey: ["cart"] });
+      const recommendations = await getRecommendations(productId);
+      queryClient.setQueryData(["recommendations"], recommendations);
     },
   });
 
@@ -93,6 +104,7 @@ export function useCart() {
       items: [],
       total: { amount: "0", currencyCode: "EUR" },
     },
+    recommendations: recommendations ?? [],
     addToCart,
     updateQuantity,
     removeFromCart,

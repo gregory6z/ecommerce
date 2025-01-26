@@ -31,6 +31,7 @@ export function QuickAddToCartDrawer({ product }: { product: Product }) {
     addToCart.mutate({
       variantId: product.variants[0].id,
       quantity: 1,
+      productId: product.id,
     });
     // Close the drawer first
     setQuickAddOpen(false);
