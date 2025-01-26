@@ -8,7 +8,6 @@ import {
   DrawerFooter,
   DrawerClose,
 } from "@/components/ui/drawer";
-import { PingButton } from "@/components/ui/ping-button";
 import { ShoppingBag } from "lucide-react";
 import { Drawer } from "vaul";
 import Image from "next/image";
@@ -44,7 +43,11 @@ export function QuickAddToCartDrawer({ product }: { product: Product }) {
     <div>
       <Drawer.Root open={isQuickAddOpen} onOpenChange={setQuickAddOpen}>
         <DrawerTrigger asChild>
-          <Button size="iconSm" variant={"rounded"}>
+          <Button
+            className="relative top-2 left-2 inline-flex items-center justify-center lg:hidden"
+            size="iconSm"
+            variant={"rounded"}
+          >
             <ShoppingBag />
           </Button>
         </DrawerTrigger>
