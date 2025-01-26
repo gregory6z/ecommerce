@@ -46,7 +46,7 @@ export function ShoppingBagButton() {
         >
           <ShoppingBag className="h-6 w-6" />
           {itemCount > 0 && (
-            <span className="absolute top-0 right-2 inline-flex h-4 w-4 items-center justify-center rounded-full bg-sky-600 font-bold text-white text-xs">
+            <span className="lg:-right-[2px] absolute top-0 right-2 inline-flex h-4 w-4 items-center justify-center rounded-full bg-sky-600 font-bold text-white text-xs">
               {itemCount}
             </span>
           )}
