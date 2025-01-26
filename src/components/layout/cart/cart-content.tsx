@@ -15,15 +15,15 @@ export function CartContent() {
   };
 
   return (
-    <main className="mt-2 px-4">
+    <main className="mt-2 px-4 lg:px-0">
       <section className="mb-4 flex flex-col">
         {cart?.items && cart.items.length > 0 ? (
           cart.items.map((product) => (
             <div
               key={product.id}
-              className="flex gap-2 border-zinc-200 border-b pt-4 pb-8 last:border-b-transparent"
+              className="flex gap-2 border-zinc-200 border-b pt-4 pb-8 last:border-b-transparent lg:gap-8 lg:pt-3 lg:pb-3"
             >
-              <div className="h-[125px] w-[100px] bg-zinc-200">
+              <div className="h-[125px] w-[100px] bg-zinc-200 lg:h-[155px] lg:w-[124px]">
                 <Image
                   src={product.image.url}
                   className="h-full w-full object-cover"
@@ -48,7 +48,7 @@ export function CartContent() {
                       </h3>
                     )}
                 </div>
-                <div className="mt-2 flex items-center gap-2">
+                <div className="mt-4 flex items-center gap-2">
                   <Button
                     className={"bg-zinc-100 text-zinc-950"}
                     variant={"rounded"}

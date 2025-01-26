@@ -6,7 +6,6 @@ import { Button } from "@/components/ui/button";
 import { ShoppingBag } from "lucide-react";
 import { CartDrawer } from "../cart/cart-drawer";
 import { Drawer } from "vaul";
-import { Sheet } from "@/components/ui/sheet";
 import { CartSheet } from "../cart/cart-sheet";
 
 export function ShoppingBagButton() {

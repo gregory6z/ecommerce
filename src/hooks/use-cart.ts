@@ -1,5 +1,6 @@
 import type { CartItem } from "@/types/cart";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useState } from "react";
 
 export interface CartResponse {
   cartId: string;
@@ -12,6 +13,7 @@ export interface CartResponse {
 
 export function useCart() {
   const queryClient = useQueryClient();
+  const [isSheetOpen, setIsSheetOpen] = useState(false);
 
   const { data: cart } = useQuery<CartResponse | null>({
     queryKey: ["cart"],
@@ -94,5 +96,7 @@ export function useCart() {
     addToCart,
     updateQuantity,
     removeFromCart,
+    isSheetOpen,
+    setIsSheetOpen,
   };
 }
