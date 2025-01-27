@@ -14,9 +14,10 @@ export interface Collection {
 export async function getCollections(): Promise<Collection[]> {
   try {
     const response = await api("/collections", {
-      cache: "no-store",
+      cache: "force-cache",
       next: {
         tags: ["collections"],
+        revalidate: 86400, // 24 hours cache
       },
     });
 

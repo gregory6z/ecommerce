@@ -44,7 +44,6 @@ const AccordionContent = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Content>
 >(({ className, children, ...props }, ref) => {
-  console.log('Accordion state:', props['data-state' as keyof typeof props])
   
   return (
     <AccordionPrimitive.Content

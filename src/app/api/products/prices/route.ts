@@ -1,7 +1,7 @@
 import { shopifyClient } from "@/lib/shopify";
 import { NextResponse } from "next/server";
 
-interface ProductNode {
+export interface ProductNode {
   id: string;
   availableForSale: boolean;
   totalInventory: number;
@@ -61,6 +61,48 @@ export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const tags = searchParams.get("tags");
   const collection = searchParams.get("collection");
+  const handle = searchParams.get("handle");
+  const id = searchParams.get("id");
+
+  const handleQuery = `
+    query GetProductByHandle($handle: String!) {
+      product(handle: $handle) {
+        id
+        availableForSale
+        totalInventory
+        price: priceRange {
+          minVariantPrice {
+            amount
+            currencyCode
+          }
+        }
+        compareAtPrice: compareAtPriceRange {
+          minVariantPrice {
+            amount
+            currencyCode
+          }
+        }
+        variants(first: 10) {
+          edges {
+            node {
+              id
+              quantityAvailable
+              currentlyNotInStock
+              availableForSale
+              price {
+                amount
+                currencyCode
+              }
+              compareAtPrice {
+                amount
+                currencyCode
+              }
+            }
+          }
+        }
+      }
+    }
+  `;
 
   const productsQuery = `
     query ProductsPrices($query: String!) {
@@ -155,7 +197,22 @@ export async function GET(request: Request) {
   try {
     let data: ProductsResponse | CollectionResponse;
 
-    if (collection && !tags) {
+    if (handle) {
+      const response = await shopifyClient.request<{ product: ProductNode }>(
+        handleQuery,
+        { handle },
+      );
+      const priceData = {
+        products: {
+          edges: [
+            {
+              node: response.product,
+            },
+          ],
+        },
+      };
+      data = priceData;
+    } else if (collection && !tags) {
       data = await shopifyClient.request(collectionQuery, {
         handle: collection,
       });
@@ -165,11 +222,13 @@ export async function GET(request: Request) {
         queryFilter = `tag:'${tags}' AND in_collection:'${collection}'`;
       } else if (tags) {
         queryFilter = `tag:'${tags}'`;
+      } else if (id) {
+        queryFilter = `id:'${id}'`;
       }
 
-      data = (await shopifyClient.request(productsQuery, {
+      data = await shopifyClient.request(productsQuery, {
         query: queryFilter,
-      })) as ProductsResponse;
+      });
     }
 
     const products =

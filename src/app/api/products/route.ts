@@ -58,6 +58,8 @@ export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const tags = searchParams.get("tags");
   const collection = searchParams.get("collection");
+  const handle = searchParams.get("handle");
+  // const id = searchParams.get("id");
 
   const productsQuery = `
     query Products($query: String!) {
@@ -147,10 +149,66 @@ export async function GET(request: Request) {
     }
   `;
 
+  const handleQuery = `
+  query GetProductByHandle($handle: String!) {
+    product(handle: $handle) {
+      id
+      title
+      handle
+      description
+      tags
+      collections(first: 1) {
+        edges {
+          node {
+            handle
+          }
+        }
+      }
+      images(first: 4) {
+        edges {
+          node {
+            url
+            altText
+          }
+        }
+      }
+      variants(first: 10) {
+        edges {
+          node {
+            id
+            title
+            selectedOptions {
+              name
+              value
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
   try {
     let data: ProductsResponse | CollectionResponse;
 
-    if (collection && !tags) {
+    if (handle) {
+      const response = await shopifyClient.request<{ product: ProductNode }>(
+        handleQuery,
+        { handle },
+      );
+
+      const productData = {
+        products: {
+          edges: [
+            {
+              node: response.product,
+            },
+          ],
+        },
+      } as ProductsResponse;
+
+      data = productData;
+    } else if (collection && !tags) {
       data = await shopifyClient.request(collectionQuery, {
         handle: collection,
       });

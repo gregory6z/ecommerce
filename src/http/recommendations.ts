@@ -9,9 +9,9 @@ export async function getRecommendations(productId: string) {
 
     const { recommendedIds } = await response.json();
 
-    const allProducts = await getProducts();
+    const products = await getProducts({ id: productId });
 
-    const recommendedProducts: Product[] = allProducts
+    const recommendedProducts: Product[] = products
       .filter((product: { id: string }) => recommendedIds.includes(product.id))
       .sort(() => Math.random() - 0.5);
 
