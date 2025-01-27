@@ -41,7 +41,8 @@ export function QuickAddToCartDrawer({ product }: { product: Product }) {
     // Perform the cart action
   };
   return (
-    <div>
+    // biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
+    <div onClick={(e) => e.preventDefault()}>
       <Drawer.Root open={isQuickAddOpen} onOpenChange={setQuickAddOpen}>
         <DrawerTrigger asChild>
           <Button
