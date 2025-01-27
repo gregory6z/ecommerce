@@ -49,7 +49,6 @@ export function CheckoutButton() {
       variant={"third"}
       size={"xl"}
       onClick={handleCheckout}
-      disabled={isLoading || !cart.items.length}
       className="w-full text-bold text-lg text-white disabled:cursor-not-allowed"
     >
       {isLoading ? "Processando..." : "Finalizar Compra"}
