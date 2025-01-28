@@ -294,8 +294,6 @@ export async function GET(request: Request) {
         ? data.collection.products.edges
         : data.products.edges;
 
-    console.log("products", products);
-
     const formattedPrices = products.map((edge) => ({
       id: edge.node.id,
       availableForSale: edge.node.availableForSale,
@@ -311,8 +309,6 @@ export async function GET(request: Request) {
         compareAtPrice: variant.node.compareAtPrice || null,
       })),
     }));
-
-    console.log("formattedPrices", formattedPrices);
 
     return NextResponse.json({ prices: formattedPrices });
   } catch (error) {
