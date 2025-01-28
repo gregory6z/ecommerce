@@ -63,6 +63,7 @@ export async function GET(request: Request) {
   const collection = searchParams.get("collection");
   const handle = searchParams.get("handle");
   const id = searchParams.get("id");
+  const ids = searchParams.get("id")?.split(",");
 
   const handleQuery = `
     query GetProductByHandle($handle: String!) {
@@ -194,10 +195,67 @@ export async function GET(request: Request) {
     }
   `;
 
+  const idsQuery = `
+  query GetProductsByIds($ids: [ID!]!) {
+    nodes(ids: $ids) {
+      ... on Product {
+        id
+        availableForSale
+        totalInventory
+        price: priceRange {
+          minVariantPrice {
+            amount
+            currencyCode
+          }
+        }
+        compareAtPrice: compareAtPriceRange {
+          minVariantPrice {
+            amount
+            currencyCode
+          }
+        }
+        variants(first: 10) {
+          edges {
+            node {
+              id
+              quantityAvailable
+              currentlyNotInStock
+              availableForSale
+              price {
+                amount
+                currencyCode
+              }
+              compareAtPrice {
+                amount
+                currencyCode
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
   try {
     let data: ProductsResponse | CollectionResponse;
 
-    if (handle) {
+    if (ids && ids.length > 0) {
+      const response = await shopifyClient.request<{ nodes: ProductNode[] }>(
+        idsQuery,
+        { ids },
+      );
+
+      const priceData = {
+        products: {
+          edges: response.nodes.map((product) => ({
+            node: product,
+          })),
+        },
+      };
+
+      data = priceData;
+    } else if (handle) {
       const response = await shopifyClient.request<{ product: ProductNode }>(
         handleQuery,
         { handle },
@@ -236,6 +294,8 @@ export async function GET(request: Request) {
         ? data.collection.products.edges
         : data.products.edges;
 
+    console.log("products", products);
+
     const formattedPrices = products.map((edge) => ({
       id: edge.node.id,
       availableForSale: edge.node.availableForSale,
@@ -251,6 +311,8 @@ export async function GET(request: Request) {
         compareAtPrice: variant.node.compareAtPrice || null,
       })),
     }));
+
+    console.log("formattedPrices", formattedPrices);
 
     return NextResponse.json({ prices: formattedPrices });
   } catch (error) {

@@ -59,7 +59,7 @@ export async function GET(request: Request) {
   const tags = searchParams.get("tags");
   const collection = searchParams.get("collection");
   const handle = searchParams.get("handle");
-  // const id = searchParams.get("id");
+  const ids = searchParams.get("id")?.split(",");
 
   const productsQuery = `
     query Products($query: String!) {
@@ -188,10 +188,66 @@ export async function GET(request: Request) {
   }
 `;
 
+  const idsQuery = `
+query GetProductsByIds($ids: [ID!]!) {
+  nodes(ids: $ids) {
+    ... on Product {
+      id
+      title
+      handle
+      description
+      tags
+      collections(first: 1) {
+        edges {
+          node {
+            handle
+          }
+        }
+      }
+      images(first: 4) {
+        edges {
+          node {
+            url
+            altText
+          }
+        }
+      }
+      variants(first: 10) {
+        edges {
+          node {
+            id
+            title
+            selectedOptions {
+              name
+              value
+            }
+          }
+        }
+      }
+    }
+  }
+}
+`;
+
   try {
     let data: ProductsResponse | CollectionResponse;
 
-    if (handle) {
+    if (ids && ids.length > 0) {
+      const response = await shopifyClient.request<{ nodes: ProductNode[] }>(
+        idsQuery,
+        { ids },
+      );
+
+      const productData = {
+        products: {
+          edges: response.nodes.map((product) => ({
+            node: product,
+          })),
+        },
+      } as ProductsResponse;
+
+      data = productData;
+    } else if (handle) {
       const response = await shopifyClient.request<{ product: ProductNode }>(
         handleQuery,
         { handle },
@@ -209,7 +265,7 @@ export async function GET(request: Request) {
 
       data = productData;
     } else if (collection && !tags) {
-      data = await shopifyClient.request(collectionQuery, {
+      data = await shopifyClient.request<CollectionResponse>(collectionQuery, {
         handle: collection,
       });
     } else {
@@ -220,9 +276,9 @@ export async function GET(request: Request) {
         queryFilter = `tag:'${tags}'`;
       }
 
-      data = (await shopifyClient.request(productsQuery, {
+      data = await shopifyClient.request<ProductsResponse>(productsQuery, {
         query: queryFilter,
-      })) as ProductsResponse;
+      });
     }
 
     const products =

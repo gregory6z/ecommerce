@@ -9,7 +9,13 @@ export async function getRecommendations(productId: string) {
 
     const { recommendedIds } = await response.json();
 
-    const products = await getProducts({ id: productId });
+    const idsParam = Array.isArray(recommendedIds)
+      ? recommendedIds.join(",")
+      : recommendedIds;
+
+    const products = await getProducts({ id: idsParam });
+
+    console.log(products);
 
     const recommendedProducts: Product[] = products
       .filter((product: { id: string }) => recommendedIds.includes(product.id))

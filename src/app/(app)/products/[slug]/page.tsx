@@ -8,6 +8,7 @@ import {
   Product as TypeProduct,
 } from "@/http/products";
 import { formatEUR } from "@/lib/utils";
+import { getRecommendations } from "@/http/recommendations";
 
 type Params = Promise<{ slug: string }>;
 
@@ -17,6 +18,8 @@ export default async function Product({ params }: { params: Params }) {
   const product: TypeProduct = await getProducts({
     handle: slug,
   });
+
+  await getRecommendations(product.id);
 
   const priceFormatted = formatEUR(product.price.amount);
 
