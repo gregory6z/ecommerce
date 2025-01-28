@@ -73,7 +73,7 @@ export async function getProducts({
             tags ? `tag-${tags}` : "",
             id ? `product-id-${id}` : "",
           ].filter(Boolean),
-          revalidate: 86400, // 24 hours in seconds
+          revalidate: 0, // 24 hours in seconds
         },
       }),
       api(`/products/prices${queryString ? `?${queryString}` : ""}`, {

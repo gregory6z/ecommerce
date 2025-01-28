@@ -2,7 +2,11 @@ import { Button } from "@/components/ui/button";
 import { CarouselProduct } from "./components/carousel-product";
 import { Heart, Share } from "lucide-react";
 // biome-ignore lint/style/useImportType: <explanation>
-import { getProducts, Product as TypeProduct } from "@/http/products";
+import {
+  getProducts,
+  ProductVariant,
+  Product as TypeProduct,
+} from "@/http/products";
 import { formatEUR } from "@/lib/utils";
 
 type Params = Promise<{ slug: string }>;
@@ -43,6 +47,16 @@ export default async function Product({ params }: { params: Params }) {
         <Button size={"xl"} className="mt-8 w-full">
           AJOUTER AU PANNIER
         </Button>
+
+        <div>
+          {product?.variants?.map((variant: ProductVariant) => (
+            <div key={variant.id}>
+              {variant.selectedOptions.map((option) => (
+                <Button key={option.value}>{option.value}</Button>
+              ))}
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
