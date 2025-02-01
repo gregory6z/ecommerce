@@ -1,6 +1,25 @@
 import { shopifyClient } from "@/lib/shopify";
 import { NextResponse } from "next/server";
 
+export interface Metafield {
+  id: string;
+  namespace: string;
+  key: string;
+  value: string;
+  type: string;
+}
+
+export interface ProductWithMetafields {
+  id: string;
+  title: string;
+  handle: string;
+  metafields: {
+    edges: Array<{
+      node: Metafield;
+    }>;
+  };
+}
+
 interface ProductNode {
   id: string;
   title: string;

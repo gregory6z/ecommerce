@@ -12,7 +12,7 @@ import Link from "next/link";
 interface ProductCarouselProps {
   title: string;
   products?: Product[];
-  link: string;
+  link?: string;
   isTag?: boolean;
 }
 
@@ -31,10 +31,12 @@ export default function ProductsCarousel({
         }}
       >
         <header className="mb-6 flex items-center justify-between pr-4 lg:justify-start lg:gap-8">
-          <h2 className="font-bold text-xl lg:text-2xl ">{title}</h2>
-          <Link href={link} className="font-bold underline">
-            Voir Tout
-          </Link>
+          <h2 className="font-bold text-xl uppercase lg:text-2xl ">{title}</h2>
+          {link && (
+            <Link href={link} className="font-bold underline">
+              Voir Tout
+            </Link>
+          )}
         </header>
 
         <div className="hidden lg:block">

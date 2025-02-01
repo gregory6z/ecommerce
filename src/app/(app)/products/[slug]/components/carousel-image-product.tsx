@@ -13,21 +13,18 @@ interface CarouselProductProps {
   }[];
 }
 
-export function CarouselProduct({ images }: CarouselProductProps) {
+export function CarouselImageProduct({ images }: CarouselProductProps) {
   return (
     <Carousel
       opts={{
         align: "center",
       }}
-      className="w-full"
+      className="w-full xl:hidden"
     >
       <CarouselContent className="-ml-1 w-full">
         {images.map((image) => (
-          <CarouselItem
-            key={image.url}
-            className="basis-[100%] pl-1 sm:basis-1/2 md:basis-1/3 lg:basis-1/4"
-          >
-            <AspectRatio ratio={4 / 5} className="md:aspect-[16/9]">
+          <CarouselItem key={image.url} className="basis-[100%] pl-1 ">
+            <AspectRatio ratio={4 / 5} className="">
               <div className="flex h-full w-full items-center justify-center ">
                 <Image
                   width={800}

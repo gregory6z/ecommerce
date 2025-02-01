@@ -11,6 +11,17 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+@layer utilities {
+  .scrollbar-hidden::-webkit-scrollbar {
+    display: none;
+  }
+
+  .scrollbar-hidden {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE e Edge */
+  }
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
