@@ -77,7 +77,7 @@ export async function getProducts({
         },
       }),
       api(`/products/prices${queryString ? `?${queryString}` : ""}`, {
-        cache: "no-store",
+        next: { revalidate: 86400 }, // 24 hours in seconds
       }),
     ]);
 
