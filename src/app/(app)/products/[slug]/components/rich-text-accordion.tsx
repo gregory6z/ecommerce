@@ -48,9 +48,8 @@ export function RichTextAccordion({ metafields }: RichTextAccordionProps) {
     >
       {ORDER.map((key) => {
         const metafield = metafields.find((m) => m.key === key);
-        if (!metafield) {
-          return null;
-        }
+        // biome-ignore lint/style/useBlockStatements: <explanation>
+        if (!metafield?.key) return null;
 
         return (
           <AccordionItem
