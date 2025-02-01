@@ -5,6 +5,9 @@ export async function getRecommendations(productId: string) {
   try {
     const response = await api(
       `/products/recommendations?productId=${productId}`,
+      {
+        cache: "no-store",
+      },
     );
 
     const { recommendedIds } = await response.json();
