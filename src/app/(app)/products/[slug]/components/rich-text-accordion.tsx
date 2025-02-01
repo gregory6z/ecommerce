@@ -5,31 +5,25 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
-interface TextNode {
-  type: "text";
-  value: string;
-  bold?: boolean;
-}
-
-interface ParagraphNode {
-  type: "paragraph";
-  children: TextNode[];
-}
-
-interface RootNode {
-  type: "root";
-  children: ParagraphNode[];
-}
-
 interface Metafield {
   namespace: string;
-  key: string;
+  key: MetafieldKey;
   value: string;
 }
+
+const ORDER = [
+  "details",
+  "ingredients",
+  "how_to",
+  "earth_conscious_details",
+] as const;
+
+type MetafieldKey = (typeof ORDER)[number];
 
 interface RichTextAccordionProps {
   metafields: Metafield[];
 }
+
 const TRANSLATIONS = {
   details: "DÉTAILS",
   ingredients: "INGRÉDIENTS",
@@ -37,9 +31,8 @@ const TRANSLATIONS = {
   earth_conscious_details: "DÉTAILS ÉCO-RESPONSABLES",
 };
 
-const ORDER = ["details", "ingredients", "how_to", "earth_conscious_details"];
-
 export function RichTextAccordion({ metafields }: RichTextAccordionProps) {
+  console.log(metafields);
   return (
     <Accordion
       type="multiple"
@@ -48,8 +41,10 @@ export function RichTextAccordion({ metafields }: RichTextAccordionProps) {
     >
       {ORDER.map((key) => {
         const metafield = metafields.find((m) => m.key === key);
-        // biome-ignore lint/style/useBlockStatements: <explanation>
-        if (!metafield?.key) return null;
+
+        if (!metafield) {
+          return null;
+        }
 
         return (
           <AccordionItem
@@ -58,18 +53,30 @@ export function RichTextAccordion({ metafields }: RichTextAccordionProps) {
             className="py-2"
           >
             <AccordionTrigger className="font-semibold text-lg ">
-              {TRANSLATIONS[metafield.key as keyof typeof TRANSLATIONS]}
+              {TRANSLATIONS[metafield.key]}
             </AccordionTrigger>
             <AccordionContent>
               <div className="my-6 space-y-4">
                 {JSON.parse(metafield.value).children.map(
-                  (paragraph: ParagraphNode, pIndex: number) => (
+                  (
+                    paragraph: {
+                      children: {
+                        type: string;
+                        value: string;
+                        bold?: boolean;
+                      }[];
+                    },
+                    pIndex: number,
+                  ) => (
                     <p
                       key={`paragraph-${pIndex}-${paragraph.children.map((child) => child.value).join("")}`}
                     >
                       {paragraph.children.map(
-                        (text: TextNode, tIndex: number) =>
-                          text.bold ? (
+                        (
+                          text: { type: string; value: string; bold?: boolean },
+                          tIndex: number,
+                        ) =>
+                          text.type === "text" && text.bold ? (
                             <strong key={`text-${tIndex}-${text.value}`}>
                               {text.value}
                             </strong>

@@ -13,6 +13,7 @@ import ProductImages from "./components/product-images";
 import { Star } from "lucide-react";
 import { getMetafields } from "@/http/metafields";
 import { RichTextAccordion } from "./components/rich-text-accordion";
+// import { RichTextAccordion } from "./components/rich-text-accordion";
 
 type Params = Promise<{ slug: string }>;
 
@@ -26,6 +27,8 @@ export default async function Product({ params }: { params: Params }) {
   const products = await getRecommendations(product.id);
 
   const metafields = await getMetafields(slug);
+
+  console.log(metafields);
 
   const priceFormatted = formatEUR(product.price.amount);
 
@@ -92,8 +95,7 @@ export default async function Product({ params }: { params: Params }) {
           <Button size={"xl"} className="mt-8 w-full">
             AJOUTER AU PANNIER
           </Button>
-
-          <RichTextAccordion metafields={metafields} />
+          {metafields && <RichTextAccordion metafields={metafields as any} />}
         </div>
       </div>
       <div className="mt-[10rem]">

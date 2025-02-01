@@ -8,7 +8,7 @@ export interface Metafield {
 
 export async function getMetafields(handle: string) {
   if (!handle) {
-    return [];
+    return null;
   }
 
   try {
@@ -19,9 +19,13 @@ export async function getMetafields(handle: string) {
     }
 
     const { metafields } = await response.json();
+
+    if (!metafields || metafields.every((item: any) => item === null)) {
+      return null;
+    }
+
     return metafields as Metafield[];
   } catch (error) {
-    console.log(error);
     console.error("Error fetching metafields:", error);
     return [];
   }
