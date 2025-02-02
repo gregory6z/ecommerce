@@ -8,7 +8,7 @@ import { SearchSheet } from "./search-sheet";
 
 export default function Header() {
   return (
-    <header className="">
+    <header className="sticky top-0 z-50 ">
       <div className="hidden h-9 bg-zinc-950 text-zinc-100 lg:flex">
         <nav className="flex w-full items-center justify-end gap-8 px-12 text-sm">
           <p>Blog</p>
@@ -18,7 +18,7 @@ export default function Header() {
           <p>Aide</p>
         </nav>
       </div>
-      <div className="mx-auto px-4 lg:px-12">
+      <div className="mx-auto border-zinc-200 border-b bg-white px-4 lg:px-12">
         <nav className="flex h-[4.375rem] items-center justify-between">
           <div className="flex items-start gap-2 lg:hidden">
             <MenuSheet />
@@ -39,22 +39,40 @@ export default function Header() {
           </Link>
 
           <nav className="hidden lg:flex lg:gap-4 xl:gap-8">
-            <Link className="font-bold uppercase" href={"/"}>
+            <Link
+              className="font-bold uppercase"
+              href={"/collections/skin-care"}
+            >
               Skin care
             </Link>
-            <Link className="font-bold uppercase" href={"/"}>
+            <Link
+              className="font-bold uppercase"
+              href={"/collections/anti-age"}
+            >
               Anti-age
             </Link>
-            <Link className="font-bold uppercase" href={"/"}>
+            <Link
+              className="font-bold uppercase"
+              href={"/collections/hydratants"}
+            >
               Hydratants
             </Link>
-            <Link className="font-bold uppercase" href={"/"}>
+            <Link
+              className="font-bold uppercase"
+              href={"/collections/anti-acne"}
+            >
               Anti-acne
             </Link>
-            <Link className="font-bold uppercase" href={"/"}>
+            <Link
+              className="font-bold uppercase"
+              href={"/collections/maquillage"}
+            >
               Maquillage
             </Link>
-            <Link className="font-bold uppercase lg:hidden xl:block" href={"/"}>
+            <Link
+              className="font-bold uppercase lg:hidden xl:block"
+              href={"/collections/parfums"}
+            >
               Parfums
             </Link>
           </nav>
