@@ -32,7 +32,6 @@ const TRANSLATIONS = {
 };
 
 export function RichTextAccordion({ metafields }: RichTextAccordionProps) {
-  console.log(metafields);
   return (
     <Accordion
       type="multiple"

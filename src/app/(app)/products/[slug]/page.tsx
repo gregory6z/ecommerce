@@ -28,15 +28,13 @@ export default async function Product({ params }: { params: Params }) {
 
   const metafields = await getMetafields(slug);
 
-  console.log(metafields);
-
   const priceFormatted = formatEUR(product.price.amount);
 
   return (
     <section className="flex flex-col">
       <div className="grid flex-col lg:grid-cols-2 lg:flex-row lg:gap-6 lg:px-16 xl:gap-16">
         <CarouselImageProduct images={product.images} />
-        <ProductImages />
+        <ProductImages images={product.images} />
 
         {/* <div className="mt-4 grid grid-cols-3 gap-1">
         <div className="flex items-center justify-center gap-2">
