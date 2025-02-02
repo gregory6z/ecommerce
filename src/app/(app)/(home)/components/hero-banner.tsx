@@ -7,7 +7,7 @@ export default function HeroBanner() {
   return (
     <div>
       <div className="md:hidden">
-        <AspectRatio ratio={3 / 4} className="md:aspect-[16/9] ">
+        <AspectRatio ratio={3 / 5} className="md:aspect-[16/9] ">
           <div className="relative flex h-full w-full items-center justify-center">
             <Image
               src={"/o.jpg"}
@@ -17,7 +17,7 @@ export default function HeroBanner() {
               quality={100}
               className="h-full w-full object-cover "
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white opacity-75" />
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-zinc-950 opacity-90" />
           </div>
           <BannerTextOverlay />
         </AspectRatio>
