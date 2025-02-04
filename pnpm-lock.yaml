@@ -71,6 +71,9 @@ importers:
       make-dir:
         specifier: ^5.0.0
         version: 5.0.0
+      meilisearch:
+        specifier: ^0.48.2
+        version: 0.48.2
       mkdirp:
         specifier: ^3.0.1
         version: 3.0.1
@@ -1678,6 +1681,9 @@ packages:
   make-dir@5.0.0:
     resolution: {integrity: sha512-G0yBotnlWVonPClw+tq+xi4K7DZC9n96HjGTBDdHkstAVsDkfZhi1sTvZypXLpyQTbISBkDtK0E5XlUqDsShQg==}
     engines: {node: '>=18'}
+
+  meilisearch@0.48.2:
+    resolution: {integrity: sha512-auDB6grs3f/+dVzzPiAOOFnrVN/L87/+SWZfy56TpimDinWjU4u6Jc2o6lgeLluotpbMOFY1WpTTbqtUdMduQw==}
 
   merge-stream@2.0.0:
     resolution: {integrity: sha512-abv/qOcuPfk3URPfDzmZU1LKmuw8kT+0nIHvKrKgFrwifol/doWcdA4ZqsWQ8ENrFKkd67Mfpo/LovbIUsbt3w==}
@@ -3805,6 +3811,8 @@ snapshots:
       react: 19.0.0
 
   make-dir@5.0.0: {}
+
+  meilisearch@0.48.2: {}
 
   merge-stream@2.0.0: {}
 

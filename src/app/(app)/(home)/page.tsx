@@ -19,23 +19,24 @@ export default async function Home() {
     <main>
       <HeroBanner />
       <ProductsCarousel
-        link="/collections/promo"
-        title="PROMOTIONS"
-        products={promo}
-        isTag
-      />
-      <CategoriesCarousel categories={categories} />
-      {/* <PromotionBanner /> */}
-      {/* <ProductsCarousel title="NOUVEAUTÉS" /> */}
-      <HeroBanner />
-
-      {/* <SkinProfileBanner /> */}
-      <ProductsCarousel
         link="/collections/best-sellers"
         title="BEST SELLERS"
         products={bestSellers}
         isTag
       />
+      <CategoriesCarousel categories={categories} />
+
+      {/* <ProductsCarousel
+        link="/collections/promo"
+        title="PROMOTIONS"
+        products={promo}
+        isTag
+      /> */}
+      {/* <PromotionBanner /> */}
+      {/* <ProductsCarousel title="NOUVEAUTÉS" /> */}
+      {/* <HeroBanner /> */}
+
+      {/* <SkinProfileBanner /> */}
     </main>
   );
 }

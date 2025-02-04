@@ -16,7 +16,7 @@ export default function CategoriesCarousel({
   categories,
 }: CategoriesCarouselProps) {
   return (
-    <section className=" mt-12 mb-24 pl-4 md:mt-12 md:mb-14 md:pl-8 lg:mt-24 lg:mb-40 lg:pl-16">
+    <section className=" mt-12 mb-24 pl-4 md:mt-12 md:mb-14 md:pl-8 lg:mt-[10rem] lg:mb-40 lg:pl-16">
       <Carousel
         opts={{
           align: "start",
@@ -25,7 +25,7 @@ export default function CategoriesCarousel({
       >
         <header className="mb-6 flex items-center justify-between pr-4">
           <h2 className="font-bold text-xl lg:text-2xl ">
-            DÉCOUVREZ NOS PRODUITS
+            TROUVEZ VOTRE SOIN IDÉAL
           </h2>
         </header>
 
