@@ -5,7 +5,9 @@
   "scripts": {
     "dev": " NODE_OPTIONS='--inspect' next dev --turbopack",
     "build": "next build",
+    "index": "node src/scripts/index-products.js",
     "start": "next start",
+    "vercel-build": "pnpm build && pnpm index",
     "lint": "next lint"
   },
   "dependencies": {
