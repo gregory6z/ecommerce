@@ -1,5 +1,5 @@
-const { MeiliSearch } = require('meilisearch')
-const { getProducts } = require('../http/products')
+import { MeiliSearch } from 'meilisearch'
+import { getProducts } from '../http/products'
 
 const meilisearch = new MeiliSearch({
   host: process.env.MEILISEARCH_HOST,
@@ -8,7 +8,7 @@ const meilisearch = new MeiliSearch({
 
 async function indexProducts() {
   const products = await getProducts()
-  const index = meilisearch.index(products)
+  const index = meilisearch.index('products')
   await index.addDocuments(products)
   console.log('Produtos indexados com sucesso!')
 }
