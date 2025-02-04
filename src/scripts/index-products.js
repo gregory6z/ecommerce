@@ -1,5 +1,5 @@
 import { MeiliSearch } from 'meilisearch'
-import { getProducts } from '../http/products.ts'
+import fetch from 'node-fetch'
 
 const meilisearch = new MeiliSearch({
   host: process.env.MEILISEARCH_HOST,
@@ -7,7 +7,9 @@ const meilisearch = new MeiliSearch({
 })
 
 async function indexProducts() {
-  const products = await getProducts()
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/products`)
+  const products = await response.json()
+  
   const index = meilisearch.index('products')
   await index.addDocuments(products)
   console.log('Produtos indexados com sucesso!')
