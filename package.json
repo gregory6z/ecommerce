@@ -5,7 +5,7 @@
   "scripts": {
     "dev": " NODE_OPTIONS='--inspect' next dev --turbopack",
     "build": "next build",
-    "index": "node src/scripts/index-products.js",
+    "index": "tsx src/scripts/index-products.js",
     "start": "next start",
     "vercel-build": "pnpm build && pnpm index",
     "lint": "next lint"
@@ -55,6 +55,7 @@
     "prettier": "^3.4.2",
     "prettier-plugin-tailwindcss": "^0.6.11",
     "tailwindcss": "^3.4.17",
+    "tsx": "^4.19.2",
     "typescript": "^5.7.3"
   },
   "peerDependencies": {
