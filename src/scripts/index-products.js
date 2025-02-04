@@ -1,5 +1,5 @@
 import { MeiliSearch } from 'meilisearch'
-import { getProducts } from '../http/products'
+import { getProducts } from '../http/products.ts'
 
 const meilisearch = new MeiliSearch({
   host: process.env.MEILISEARCH_HOST,
