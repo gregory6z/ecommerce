@@ -67,12 +67,12 @@ export async function getProducts({
     const [productsResponse, pricesResponse] = await Promise.all([
       api(`/products${queryString ? `?${queryString}` : ""}`, {
         next: {
-          tags: [
-            handle ? `product-${handle}` : "",
-            collection ? `collection-${collection}` : "",
-            tags ? `tag-${tags}` : "",
-            id ? `product-id-${id}` : "",
-          ].filter(Boolean),
+          // tags: [
+          //   handle ? `product-${handle}` : "",
+          //   collection ? `collection-${collection}` : "",
+          //   tags ? `tag-${tags}` : "",
+          //   id ? `product-id-${id}` : "",
+          // ].filter(Boolean),
           revalidate: 86400, // 24 hours in seconds
         },
       }),

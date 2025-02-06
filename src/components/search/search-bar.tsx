@@ -1,92 +1,132 @@
 "use client";
 
-import { algoliaClient } from "@/lib/algolia";
-
 import Image from "next/image";
-import {
-  Configure,
-  Hits,
-  Index,
-  InstantSearch,
-  useSearchBox,
-} from "react-instantsearch";
-import { formatEUR } from "@/lib/utils";
-import { Input } from "../ui/input";
+import { Hits, InstantSearch, useSearchBox } from "react-instantsearch";
 import { Search, X } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import type { SearchClient } from "algoliasearch";
+import type { Product } from "@/http/products";
+import { useState } from "react";
 
-function Hit({ hit }: { hit: any }) {
-  const formattedPrice = formatEUR(hit.price);
+function createSearchClient() {
+  return {
+    async search(requests: any[]) {
+      const searches = requests.map(async (request) => {
+        if (!request || !request.params) {
+          return Promise.resolve({
+            hits: [],
+            nbHits: 0,
+            page: 0,
+            nbPages: 0,
+            hitsPerPage: 0,
+            processingTimeMS: 0,
+            query: "",
+          });
+        }
+
+        const {
+          indexName = "products",
+          params: { hitsPerPage = 20, page = 0 } = {},
+        } = request;
+
+        const searchQuery = request.params?.query || request.query || "";
+
+        if (!indexName) {
+          return Promise.resolve({
+            hits: [],
+            nbHits: 0,
+            page: 0,
+            nbPages: 0,
+            hitsPerPage: 0,
+            processingTimeMS: 0,
+            query: "",
+          });
+        }
+
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_MEILISEARCH_HOST}/indexes/${indexName}/search`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${process.env.NEXT_PUBLIC_MEILISEARCH_API_KEY}`,
+            },
+            body: JSON.stringify({
+              q: searchQuery,
+              limit: hitsPerPage,
+              offset: page * hitsPerPage,
+            }),
+          },
+        );
+
+        const data = await response.json();
+
+        return {
+          hits: data.hits || [],
+          nbHits: data.estimatedTotalHits || 0,
+          page,
+          nbPages: Math.ceil((data.estimatedTotalHits || 0) / hitsPerPage),
+          hitsPerPage,
+          processingTimeMS: data.processingTimeMs || 0,
+          query: searchQuery,
+        };
+      });
+
+      const results = await Promise.all(searches);
+      return {
+        results,
+      };
+    },
+    searchForFacetValues() {
+      return Promise.resolve({ facetHits: [] });
+    },
+  };
+}
+
+const searchClient = createSearchClient();
+
+function ProductHit({ hit }: { hit: Product }) {
+  if (!hit) {
+    return null;
+  }
+
+  const formattedPrice = hit.price
+    ? new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "EUR",
+      }).format(Number(hit.price.amount))
+    : "";
+
   return (
-    <div className="flex items-center gap-4 py-4 ">
-      <Image width={100} height={100} src={hit.image} alt={""} />
+    <div className="flex items-center gap-4 py-4">
+      {hit.images?.[0] && (
+        <Image
+          key={hit.id}
+          width={100}
+          height={100}
+          src={hit.images[0].url}
+          alt={hit.images[0].altText || hit.title || "Product image"}
+          className="object-cover"
+        />
+      )}
       <div className="flex flex-col gap-1 text-left">
-        <h3 className="font-bold">{hit.title}</h3>
-        <p className="text-zinc-600">{hit.variant_title}</p>
-        <p className="text-zinc-600">{hit.body_html_safe}</p>
-        <p className="font-bold">{formattedPrice}</p>
+        {hit.title && <h3 className="font-bold">{hit.title}</h3>}
+
+        {formattedPrice && <p className="font-bold">{formattedPrice}</p>}
       </div>
     </div>
   );
 }
-
-function SearchResults() {
-  const { query } = useSearchBox();
-
-  if (!query) {
-    return null;
-  }
-
-  return (
-    <div className="max-h-screen overflow-y-auto [&::-webkit-scrollbar]:hidden">
-      <Hits hitComponent={Hit} />
-    </div>
-  );
-}
-
-interface SuggestionHit {
-  query: string;
-}
-
-function SuggestionHit({ hit }: { hit: SuggestionHit }) {
-  return (
-    <div className="cursor-pointer p-2 hover:bg-gray-100">{hit.query}</div>
-  );
-}
-function Suggestions() {
-  const { query } = useSearchBox();
-
-  if (!query) {
-    return null;
-  }
-
-  return (
-    <div className="absolute mt-1 w-full rounded-md border bg-white shadow-lg">
-      <Index indexName="shopify_products_query_suggestions">
-        <Configure hitsPerPage={5} />
-        <Hits hitComponent={SuggestionHit} />
-      </Index>
-    </div>
-  );
-}
-
-export function SearchBar() {
-  return (
-    <InstantSearch searchClient={algoliaClient} indexName="shopify_products">
-      <AlgoliaSearchBox />
-      <Suggestions />
-      <SearchResults />
-    </InstantSearch>
-  );
-}
-
-function AlgoliaSearchBox() {
-  const { refine, query } = useSearchBox();
+function SearchBox() {
+  const { refine, query = "" } = useSearchBox();
+  const [showSuggestions, setShowSuggestions] = useState(false);
 
   return (
     <div className="relative">
       <Input
         value={query}
         onChange={(e) => refine(e.target.value)}
+        onFocus={() => setShowSuggestions(true)}
         className="w-full pr-10 pl-10"
         placeholder="Search products..."
       />
@@ -101,6 +141,56 @@ function AlgoliaSearchBox() {
           strokeWidth={1.5}
         />
       )}
+
+      {showSuggestions && query && (
+        <div className="absolute top-full right-0 left-0 mt-1 rounded-md bg-white shadow-lg">
+          <Hits
+            hitComponent={({ hit }) => (
+              <div
+                className="cursor-pointer p-2 hover:bg-gray-100"
+                onClick={() => {
+                  refine(hit.title);
+                  setShowSuggestions(false);
+                }}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    refine(hit.title);
+                    setShowSuggestions(false);
+                  }
+                }}
+              >
+                {hit.title}
+              </div>
+            )}
+          />
+        </div>
+      )}
     </div>
+  );
+}
+
+function SearchResults() {
+  const { query } = useSearchBox();
+
+  if (!query) {
+    return null;
+  }
+
+  return (
+    <div className="max-h-screen overflow-y-auto [&::-webkit-scrollbar]:hidden">
+      <Hits hitComponent={ProductHit} />
+    </div>
+  );
+}
+
+export function SearchBar() {
+  return (
+    <InstantSearch
+      searchClient={searchClient as unknown as SearchClient}
+      indexName="products"
+    >
+      <SearchBox />
+      <SearchResults />
+    </InstantSearch>
   );
 }

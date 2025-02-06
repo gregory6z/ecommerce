@@ -12,6 +12,8 @@ export const env = createEnv({
 
   client: {
     NEXT_PUBLIC_API_BASE_URL: z.string().url(),
+    NEXT_PUBLIC_MEILISEARCH_HOST: z.string(),
+    NEXT_PUBLIC_MEILISEARCH_API_KEY: z.string(),
   },
 
   runtimeEnv: {
@@ -21,5 +23,8 @@ export const env = createEnv({
     SHOPIFY_STORE_URL: process.env.SHOPIFY_STORE_URL,
     SHOPIFY_ACCESS_TOKEN: process.env.SHOPIFY_ACCESS_TOKEN,
     NEXT_PUBLIC_API_BASE_URL: process.env.NEXT_PUBLIC_API_BASE_URL,
+    NEXT_PUBLIC_MEILISEARCH_HOST: process.env.NEXT_PUBLIC_MEILISEARCH_HOST,
+    NEXT_PUBLIC_MEILISEARCH_API_KEY:
+      process.env.NEXT_PUBLIC_MEILISEARCH_API_KEY,
   },
 });
