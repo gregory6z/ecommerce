@@ -6,7 +6,6 @@ import { Search, X } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import type { SearchClient } from "algoliasearch";
 import type { Product } from "@/http/products";
-import { useState } from "react";
 
 function createSearchClient() {
   return {
@@ -98,7 +97,7 @@ function ProductHit({ hit }: { hit: Product }) {
     : "";
 
   return (
-    <div className="flex items-center gap-4 py-4">
+    <div key={hit.id} className="flex items-center gap-4 py-4">
       {hit.images?.[0] && (
         <Image
           key={hit.id}
@@ -119,14 +118,12 @@ function ProductHit({ hit }: { hit: Product }) {
 }
 function SearchBox() {
   const { refine, query = "" } = useSearchBox();
-  const [showSuggestions, setShowSuggestions] = useState(false);
 
   return (
     <div className="relative">
       <Input
         value={query}
         onChange={(e) => refine(e.target.value)}
-        onFocus={() => setShowSuggestions(true)}
         className="w-full pr-10 pl-10"
         placeholder="Search products..."
       />
@@ -141,30 +138,30 @@ function SearchBox() {
           strokeWidth={1.5}
         />
       )}
+    </div>
+  );
+}
 
-      {showSuggestions && query && (
-        <div className="absolute top-full right-0 left-0 mt-1 rounded-md bg-white shadow-lg">
-          <Hits
-            hitComponent={({ hit }) => (
-              <div
-                className="cursor-pointer p-2 hover:bg-gray-100"
-                onClick={() => {
-                  refine(hit.title);
-                  setShowSuggestions(false);
-                }}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter" || e.key === " ") {
-                    refine(hit.title);
-                    setShowSuggestions(false);
-                  }
-                }}
-              >
-                {hit.title}
-              </div>
-            )}
-          />
-        </div>
-      )}
+function SearchSuggestions() {
+  const { refine } = useSearchBox();
+
+  return (
+    <div className="flex flex-col gap-4 pt-2 text-left">
+      <Hits
+        hitComponent={({ hit }) => (
+          <p
+            onClick={() => refine(hit.title)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                refine(hit.title);
+              }
+            }}
+            className="cursor-pointer hover:text-gray-600"
+          >
+            {hit.title}
+          </p>
+        )}
+      />
     </div>
   );
 }
@@ -190,7 +187,9 @@ export function SearchBar() {
       indexName="products"
     >
       <SearchBox />
-      <SearchResults />
+      <SearchSuggestions />
+
+      {/* <SearchResults /> */}
     </InstantSearch>
   );
 }
