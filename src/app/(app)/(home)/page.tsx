@@ -26,12 +26,12 @@ export default async function Home() {
       />
       <CategoriesCarousel categories={categories} />
 
-      {/* <ProductsCarousel
+      <ProductsCarousel
         link="/collections/promo"
-        title="PROMOTIONS"
+        title="Nouveautés"
         products={promo}
         isTag
-      /> */}
+      />
       {/* <PromotionBanner /> */}
       {/* <ProductsCarousel title="NOUVEAUTÉS" /> */}
       {/* <HeroBanner /> */}

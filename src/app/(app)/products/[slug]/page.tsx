@@ -13,7 +13,6 @@ import ProductImages from "./components/product-images";
 import { Star } from "lucide-react";
 import { getMetafields } from "@/http/metafields";
 import { RichTextAccordion } from "./components/rich-text-accordion";
-// import { RichTextAccordion } from "./components/rich-text-accordion";
 
 type Params = Promise<{ slug: string }>;
 

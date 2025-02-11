@@ -18,10 +18,10 @@ export function ProductCard({ product }: { product: Product }) {
       <Card className="group h-full ">
         <CardHeader>
           <AspectRatio ratio={6 / 7} className="relative">
-            <div className="relative flex h-full w-full overflow-hidden bg-zinc-200">
+            <div className="relative flex h-full w-full overflow-hidden ">
               <Image
                 src={product.images[0].url}
-                className="object-cover transition-opacity lg:group-hover:opacity-0"
+                className="object-cover transition-all duration-300 ease-in-out lg:group-hover:opacity-0"
                 alt={product.images[0]?.altText || ""}
                 fill
                 priority
@@ -29,7 +29,7 @@ export function ProductCard({ product }: { product: Product }) {
               />
               <Image
                 src={product.images[1]?.url || product.images[0].url}
-                className="absolute inset-0 object-cover opacity-0 transition-opacity lg:group-hover:opacity-100"
+                className="absolute inset-0 object-cover opacity-0 transition-all duration-300 ease-in-out lg:group-hover:opacity-100"
                 alt={product.images[1]?.altText || ""}
                 fill
                 sizes="(max-width: 768px) 100vw, 33vw"
