@@ -29,7 +29,7 @@ export function CategoryCard({
     <Card className="flex h-full flex-col">
       <CardHeader>
         <AspectRatio ratio={6 / 8} className="relative">
-          <div className="relative   flex h-full w-full bg-zinc-200">
+          <div className="relative flex h-full w-full bg-zinc-200">
             {imageUrl && (
               <Image
                 src={imageUrl}

@@ -4,6 +4,7 @@ import { signOut } from "next-auth/react"
 
 export function SignOutButton() {
   return (
+    // biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
     <div
       className="mt-2 flex cursor-pointer items-center gap-3"
       onClick={() => signOut()}
