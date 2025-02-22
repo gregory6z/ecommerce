@@ -1,16 +1,16 @@
-"use client";
+'use client'
 
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { Heart, Star } from "lucide-react";
-import { AspectRatio } from "@radix-ui/react-aspect-ratio";
-import { Button } from "../ui/button";
-import Image from "next/image";
-import { formatEUR } from "@/lib/utils";
-import { QuickAddToCartDrawer } from "../layout/cart/quick-add-to-cart-drawer";
+import { Card, CardContent, CardHeader } from '@/components/ui/card'
+import { formatEUR } from '@/lib/utils'
+import { AspectRatio } from '@radix-ui/react-aspect-ratio'
+import { Heart, Star } from 'lucide-react'
+import Image from 'next/image'
+import { QuickAddToCartDrawer } from '../layout/cart/quick-add-to-cart-drawer'
+import { Button } from '../ui/button'
 
-import type { Product } from "@/http/products";
-import Link from "next/link";
-import { AddToCartButton } from "../layout/cart/add-to-cart-button";
+import type { Product } from '@/http/products'
+import Link from 'next/link'
+import { AddToCartButton } from '../layout/cart/add-to-cart-button'
 
 export function ProductCard({ product }: { product: Product }) {
   return (
@@ -22,7 +22,7 @@ export function ProductCard({ product }: { product: Product }) {
               <Image
                 src={product.images[0].url}
                 className="object-cover transition-all duration-300 ease-in-out lg:group-hover:opacity-0"
-                alt={product.images[0]?.altText || ""}
+                alt={product.images[0]?.altText || ''}
                 fill
                 priority
                 sizes="(max-width: 768px) 100vw, 33vw"
@@ -30,7 +30,7 @@ export function ProductCard({ product }: { product: Product }) {
               <Image
                 src={product.images[1]?.url || product.images[0].url}
                 className="absolute inset-0 object-cover opacity-0 transition-all duration-300 ease-in-out lg:group-hover:opacity-100"
-                alt={product.images[1]?.altText || ""}
+                alt={product.images[1]?.altText || ''}
                 fill
                 sizes="(max-width: 768px) 100vw, 33vw"
               />
@@ -40,8 +40,8 @@ export function ProductCard({ product }: { product: Product }) {
               <QuickAddToCartDrawer product={product} />
             </div>
             <Button
-              variant={"rounded"}
-              size={"iconSm"}
+              variant={'rounded'}
+              size={'iconSm'}
               className="absolute top-2 right-2"
             >
               <Heart />
@@ -56,8 +56,8 @@ export function ProductCard({ product }: { product: Product }) {
                     ((Number(product.compareAtPrice.amount) -
                       Number(product.price.amount)) /
                       Number(product.compareAtPrice.amount)) *
-                      100,
-                  ),
+                      100
+                  )
                 )}%`}
               </span>
             ) : (
@@ -84,7 +84,7 @@ export function ProductCard({ product }: { product: Product }) {
           )}
 
           <div className="flex gap-2">
-            {" "}
+            {' '}
             <h3 className=" font-bold ">{formatEUR(product.price.amount)}</h3>
             {product.compareAtPrice?.amount &&
               Number(product.compareAtPrice?.amount) > 0 && (
@@ -96,5 +96,5 @@ export function ProductCard({ product }: { product: Product }) {
         </CardContent>
       </Card>
     </Link>
-  );
+  )
 }

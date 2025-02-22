@@ -1,11 +1,11 @@
-import Header from "@/components/layout/header";
-import { HeaderWrapper } from "@/components/layout/header/header-wrapper";
-import { Usp } from "@/components/layout/usp";
+import Header from "@/components/layout/header"
+import { HeaderWrapper } from "@/components/layout/header/header-wrapper"
+import { Usp } from "@/components/layout/usp"
 
 export default function LayoutWithHeader({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
   return (
     <div>
@@ -21,5 +21,5 @@ export default function LayoutWithHeader({
       <Usp />
       {children}
     </div>
-  );
+  )
 }

@@ -5,17 +5,17 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { AspectRatio } from "@radix-ui/react-aspect-ratio";
-import Image from "next/image";
-import Link from "next/link";
+} from "@/components/ui/card"
+import { AspectRatio } from "@radix-ui/react-aspect-ratio"
+import Image from "next/image"
+import Link from "next/link"
 
 interface CategoryCardProps {
-  title: string;
-  slug: string;
-  description: string;
-  imageAlt?: string;
-  imageUrl?: string;
+  title: string
+  slug: string
+  description: string
+  imageAlt?: string
+  imageUrl?: string
 }
 
 export function CategoryCard({
@@ -29,7 +29,7 @@ export function CategoryCard({
     <Card className="flex h-full flex-col">
       <CardHeader>
         <AspectRatio ratio={6 / 8} className="relative">
-          <div className="relative flex h-full w-full bg-zinc-200">
+          <div className="relative   flex h-full w-full bg-zinc-200">
             {imageUrl && (
               <Image
                 src={imageUrl}
@@ -64,5 +64,5 @@ export function CategoryCard({
         </Link>
       </CardFooter>
     </Card>
-  );
+  )
 }
