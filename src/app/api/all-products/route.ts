@@ -104,7 +104,7 @@ export async function GET() {
                 }
               }
             }
-            images(first: 4) {
+            images(first: 50) {
               edges {
                 node {
                   url
@@ -112,7 +112,7 @@ export async function GET() {
                 }
               }
             }
-            variants(first: 10) {
+            variants(first: 50) {
               edges {
                 node {
                   id
@@ -187,7 +187,20 @@ export async function GET() {
       })),
     }))
 
-    return NextResponse.json({ products: formattedProducts })
+    return NextResponse.json(
+      {
+        products: formattedProducts,
+      },
+      {
+        headers: {
+          "Cache-Control": "public, s-maxage=86400",
+          "X-Tags": [
+            "all-products",
+            ...formattedProducts.map((p) => `product-${p.id}`),
+          ].join(","),
+        },
+      },
+    )
   } catch (error) {
     console.error("Error fetching products:", error)
     return NextResponse.json(

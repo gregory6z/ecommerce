@@ -1,43 +1,43 @@
-import { api } from "@/data/api";
+import { api } from "@/data/api"
 
 export interface ProductVariant {
-  id: string;
-  title: string;
-  availableForSale: boolean;
+  id: string
+  title: string
+  availableForSale: boolean
   price: {
-    amount: string;
-    currencyCode: string;
-  };
+    amount: string
+    currencyCode: string
+  }
   compareAtPrice: {
-    amount: string;
-    currencyCode: string;
-  } | null;
-  quantityAvailable: number;
+    amount: string
+    currencyCode: string
+  } | null
+  quantityAvailable: number
   selectedOptions: {
-    name: string;
-    value: string;
-  }[];
+    name: string
+    value: string
+  }[]
 }
 export interface Product {
-  id: string;
-  title: string;
-  handle: string;
-  tags: string[];
-  description: string;
+  id: string
+  title: string
+  handle: string
+  tags: string[]
+  description: string
   images: {
-    url: string;
-    altText: string;
-  }[];
-  variants: ProductVariant[];
+    url: string
+    altText: string
+  }[]
+  variants: ProductVariant[]
   price: {
-    amount: string;
-    currencyCode: string;
-  };
+    amount: string
+    currencyCode: string
+  }
   compareAtPrice: {
-    amount: string;
-    currencyCode: string;
-  } | null;
-  availableForSale: boolean;
+    amount: string
+    currencyCode: string
+  } | null
+  availableForSale: boolean
 }
 
 export async function getProducts({
@@ -47,22 +47,22 @@ export async function getProducts({
   id,
 }: { tags?: string; collection?: string; handle?: string; id?: string } = {}) {
   try {
-    const searchParams = new URLSearchParams();
+    const searchParams = new URLSearchParams()
 
     if (tags) {
-      searchParams.append("tags", tags);
+      searchParams.append("tags", tags)
     }
     if (collection) {
-      searchParams.append("collection", collection);
+      searchParams.append("collection", collection)
     }
     if (handle) {
-      searchParams.append("handle", handle);
+      searchParams.append("handle", handle)
     }
     if (id) {
-      searchParams.append("id", id);
+      searchParams.append("id", id)
     }
 
-    const queryString = searchParams.toString();
+    const queryString = searchParams.toString()
 
     const [productsResponse, pricesResponse] = await Promise.all([
       api(`/products${queryString ? `?${queryString}` : ""}`, {
@@ -79,20 +79,18 @@ export async function getProducts({
       api(`/products/prices${queryString ? `?${queryString}` : ""}`, {
         next: { revalidate: 86400 }, // 24 hours in seconds
       }),
-    ]);
+    ])
 
-    const { products } = await productsResponse.json();
+    const { products } = await productsResponse.json()
 
-    const { prices } = await pricesResponse.json();
+    const { prices } = await pricesResponse.json()
 
     if (!products?.length || !prices?.length) {
-      return [];
+      return []
     }
 
     const combinedProducts = products.map((product: Product) => {
-      const productPrices = prices.find(
-        (price: any) => price.id === product.id,
-      );
+      const productPrices = prices.find((price: any) => price.id === product.id)
       return {
         ...product,
         price: productPrices?.price,
@@ -101,25 +99,25 @@ export async function getProducts({
         variants: product.variants.map((variant) => {
           const priceVariant = productPrices?.variants?.find(
             (v: { id: string }) => v.id === variant.id,
-          );
+          )
           return {
             ...variant,
             price: priceVariant?.price,
             compareAtPrice: priceVariant?.compareAtPrice,
             quantityAvailable: priceVariant?.quantityAvailable,
             availableForSale: priceVariant?.availableForSale,
-          };
+          }
         }),
-      };
-    });
+      }
+    })
 
     if (combinedProducts.length === 1) {
-      return combinedProducts[0];
+      return combinedProducts[0]
     }
 
-    return combinedProducts as Product[];
+    return combinedProducts as Product[]
   } catch (error) {
-    console.error("Error fetching products:", error);
-    return [];
+    console.error("Error fetching products:", error)
+    return []
   }
 }
