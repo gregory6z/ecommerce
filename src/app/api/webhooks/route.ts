@@ -1,7 +1,5 @@
-import { getProductById } from "@/http/get-product-by-id"
 import { revalidateTag } from "next/cache"
 import { headers } from "next/headers"
-// src/app/api/webhooks/route.ts
 import { type NextRequest, NextResponse } from "next/server"
 
 interface ShopifyProduct {
