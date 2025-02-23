@@ -1,44 +1,48 @@
-"use client";
+"use client"
 
-import { Search, X } from "lucide-react";
+import { Search, X } from "lucide-react"
 
-import * as DialogPrimitive from "@radix-ui/react-dialog";
+import * as DialogPrimitive from "@radix-ui/react-dialog"
 
+import { ProductCard } from "@/components/product/product-card"
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { getProducts, type Product } from "@/http/products";
-import { ProductCard } from "@/components/product/product-card";
-import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
-import { usePathname } from "next/navigation";
-import { Logo } from "./logo";
+} from "@/components/ui/dialog"
+import { Input } from "@/components/ui/input"
+import { getAllProducts } from "@/http/get-all-products"
+import type { Product } from "@/http/products"
+import { usePathname } from "next/navigation"
+import { useEffect, useState } from "react"
+import { Logo } from "./logo"
 
 export function DialogSearch() {
-  const [product, setProduct] = useState<Product | null>(null);
+  const [product, setProduct] = useState<Product | null>(null)
 
-  const pathname = usePathname();
+  const pathname = usePathname()
 
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false)
 
   useEffect(() => {
     const fetchProduct = async () => {
-      const fetchedProduct = await getProducts({
-        handle: "rose-tea-lotion-skin-care-set-dry-skin-moisturizing",
-      });
-      setProduct(fetchedProduct);
-    };
-    fetchProduct();
-  }, []);
+      const products = await getAllProducts()
+
+      const productByHandle = products.find(
+        (product: Product) =>
+          product.handle ===
+          "rose-tea-lotion-skin-care-set-dry-skin-moisturizing",
+      )
+      setProduct(productByHandle)
+    }
+    fetchProduct()
+  }, [])
 
   useEffect(() => {
-    setOpen(false);
-  }, [pathname]);
+    setOpen(false)
+  }, [pathname])
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -101,5 +105,5 @@ export function DialogSearch() {
         </div>
       </DialogContent>
     </Dialog>
-  );
+  )
 }

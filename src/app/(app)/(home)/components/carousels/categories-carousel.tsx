@@ -1,16 +1,18 @@
-import { CategoryCard } from "@/components/product/category-card";
+import { CategoryCard } from "@/components/product/category-card"
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from "@/components/ui/carousel";
-import type { Collection } from "@/http/collections";
+} from "@/components/ui/carousel"
+import type { Collection } from "@/http/collections"
 
 interface CategoriesCarouselProps {
-  categories: Collection[];
+  categories: Collection[]
 }
+
+export const dynamic = "force-dynamic"
 
 export default function CategoriesCarousel({
   categories,
@@ -52,5 +54,5 @@ export default function CategoriesCarousel({
         </CarouselContent>
       </Carousel>
     </section>
-  );
+  )
 }

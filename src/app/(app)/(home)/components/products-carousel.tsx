@@ -1,19 +1,18 @@
-import { ProductCard } from "@/components/product/product-card";
+import { ProductCard } from "@/components/product/product-card"
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from "@/components/ui/carousel";
-import type { Product } from "@/http/products";
-import Link from "next/link";
+} from "@/components/ui/carousel"
+import type { Product } from "@/http/products"
+import Link from "next/link"
 
 interface ProductCarouselProps {
-  title: string;
-  products?: Product[];
-  link?: string;
-  isTag?: boolean;
+  title: string
+  products?: Product[]
+  link?: string
 }
 
 export default function ProductsCarousel({
@@ -56,5 +55,5 @@ export default function ProductsCarousel({
         </CarouselContent>
       </Carousel>
     </section>
-  );
+  )
 }

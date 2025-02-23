@@ -1,29 +1,30 @@
-import { ProductCard } from "@/components/product/product-card";
-import { getProducts, type Product } from "@/http/products";
-import BannerCategory from "./componenets/banner-category";
-import HeaderCategory from "./componenets/header-category";
-import SearchSidebar from "./componenets/search-sidebar";
-import SearchDrawer from "./componenets/search-drawer";
+import { ProductCard } from "@/components/product/product-card"
+import { getAllProducts } from "@/http/get-all-products"
+import type { Product } from "@/http/products"
+import BannerCategory from "./componenets/banner-category"
+import HeaderCategory from "./componenets/header-category"
+import SearchDrawer from "./componenets/search-drawer"
+import SearchSidebar from "./componenets/search-sidebar"
 
 export default async function Categories({
   params,
 }: {
-  params: Promise<{ categories: string }>;
+  params: Promise<{ categories: string }>
 }) {
-  const { categories } = await params;
+  const { categories } = await params
+  const allProducts = await getAllProducts()
 
-  let products: Product[] = [];
+  let products: Product[] = []
 
   if (categories === "promo" || categories === "best-sellers") {
-    products = await getProducts({
-      tags: categories,
-    });
+    products = allProducts.filter((product: Product) =>
+      product.tags?.includes(categories),
+    )
   } else {
-    products = await getProducts({
-      collection: categories,
-    });
+    products = allProducts.filter(
+      (product: Product) => product.collection === categories,
+    )
   }
-
   return (
     <div className="">
       <header>
@@ -48,5 +49,5 @@ export default async function Categories({
         </section>
       </main>
     </div>
-  );
+  )
 }

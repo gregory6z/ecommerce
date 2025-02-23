@@ -1,7 +1,7 @@
-import { AspectRatio } from "@/components/ui/aspect-ratio";
-import { Button } from "@/components/ui/button";
-import Image from "next/image";
-import { BannerTextOverlay } from "./banner-text-overlay";
+import { AspectRatio } from "@/components/ui/aspect-ratio"
+import { Button } from "@/components/ui/button"
+import Image from "next/image"
+import { BannerTextOverlay } from "./banner-text-overlay"
 
 export default function HeroBanner() {
   return (
@@ -14,6 +14,7 @@ export default function HeroBanner() {
               width={1080}
               height={400}
               alt={""}
+              priority={true}
               quality={100}
               className="h-full w-full object-cover "
             />
@@ -29,6 +30,7 @@ export default function HeroBanner() {
               src={"/outronome.jpg"}
               width={1080}
               height={400}
+              priority={true}
               alt={""}
               quality={100}
               className="h-full w-full object-cover"
@@ -44,6 +46,7 @@ export default function HeroBanner() {
               src={"/outronome.jpg"}
               width={1080}
               height={400}
+              priority={true}
               alt={""}
               quality={100}
               className="h-full w-full object-cover"
@@ -53,5 +56,5 @@ export default function HeroBanner() {
         </AspectRatio>
       </div>
     </div>
-  );
+  )
 }

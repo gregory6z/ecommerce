@@ -1,5 +1,6 @@
-import { api } from "@/data/api";
-import { getProducts, type Product } from "./products";
+import { api } from "@/data/api"
+import { getAllProducts } from "./get-all-products"
+import type { Product } from "./products"
 
 export async function getRecommendations(productId: string) {
   try {
@@ -8,23 +9,23 @@ export async function getRecommendations(productId: string) {
       {
         cache: "no-store",
       },
-    );
+    )
 
-    const { recommendedIds } = await response.json();
+    const { recommendedIds } = await response.json()
 
-    const idsParam = Array.isArray(recommendedIds)
-      ? recommendedIds.join(",")
-      : recommendedIds;
+    // const idsParam = Array.isArray(recommendedIds)
+    //   ? recommendedIds.join(",")
+    //   : recommendedIds
 
-    const products = await getProducts({ id: idsParam });
+    const products = await getAllProducts()
 
     const recommendedProducts: Product[] = products
       .filter((product: { id: string }) => recommendedIds.includes(product.id))
-      .sort(() => Math.random() - 0.5);
+      .sort(() => Math.random() - 0.5)
 
-    return recommendedProducts;
+    return recommendedProducts
   } catch (error) {
-    console.error("Error fetching recommendations:", error);
-    return [];
+    console.error("Error fetching recommendations:", error)
+    return []
   }
 }

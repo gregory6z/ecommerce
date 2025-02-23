@@ -1,33 +1,33 @@
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/button"
+import { getAllProducts } from "@/http/get-all-products"
+import { getMetafields } from "@/http/metafields"
 // biome-ignore lint/style/useImportType: <explanation>
-import {
-  getProducts,
-  ProductVariant,
-  Product as TypeProduct,
-} from "@/http/products";
-import { formatEUR } from "@/lib/utils";
-import { getRecommendations } from "@/http/recommendations";
-import { CarouselImageProduct } from "./components/carousel-image-product";
-import ProductsCarousel from "../../(home)/components/products-carousel";
-import ProductImages from "./components/product-images";
-import { Star } from "lucide-react";
-import { getMetafields } from "@/http/metafields";
-import { RichTextAccordion } from "./components/rich-text-accordion";
+import { ProductVariant, Product as TypeProduct } from "@/http/products"
+import { getRecommendations } from "@/http/recommendations"
+import { formatEUR } from "@/lib/utils"
+import { Star } from "lucide-react"
+import ProductsCarousel from "../../(home)/components/products-carousel"
+import { CarouselImageProduct } from "./components/carousel-image-product"
+import ProductImages from "./components/product-images"
+import { RichTextAccordion } from "./components/rich-text-accordion"
 
-type Params = Promise<{ slug: string }>;
+type Params = Promise<{ slug: string }>
+
+export const dynamic = "force-dynamic"
 
 export default async function Product({ params }: { params: Params }) {
-  const slug = (await params).slug;
+  const slug = (await params).slug
+  const allProducts = await getAllProducts()
 
-  const product: TypeProduct = await getProducts({
-    handle: slug,
-  });
+  const product = allProducts.find((p: TypeProduct) => p.handle === slug)
 
-  const products = await getRecommendations(product.id);
+  console.log(product)
 
-  const metafields = await getMetafields(slug);
+  const products = await getRecommendations(product.id)
 
-  const priceFormatted = formatEUR(product.price.amount);
+  const metafields = await getMetafields(slug)
+
+  const priceFormatted = formatEUR(product.price.amount)
 
   return (
     <section className="flex flex-col">
@@ -99,5 +99,5 @@ export default async function Product({ params }: { params: Params }) {
         <ProductsCarousel products={products} title={"Pour vous"} />
       </div>
     </section>
-  );
+  )
 }

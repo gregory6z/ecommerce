@@ -1,19 +1,22 @@
-import { getCollections } from "@/http/collections";
-import CategoriesCarousel from "./components/carousels/categories-carousel";
-import HeroBanner from "./components/hero-banner";
-import ProductsCarousel from "./components/products-carousel";
-import { getProducts } from "@/http/products";
+import { getCollections } from "@/http/collections"
+import { getAllProducts } from "@/http/get-all-products"
+import type { Product } from "@/http/products"
+import CategoriesCarousel from "./components/carousels/categories-carousel"
+import HeroBanner from "./components/hero-banner"
+import ProductsCarousel from "./components/products-carousel"
 
 export default async function Home() {
-  const categories = await getCollections();
+  const categories = await getCollections()
 
-  const promo = await getProducts({
-    tags: "promo",
-  });
+  const products = await getAllProducts()
 
-  const bestSellers = await getProducts({
-    tags: "best-sellers",
-  });
+  const bestSellers = products.filter((product: Product) =>
+    product.tags?.includes("best-sellers"),
+  )
+
+  const promo = products.filter((product: Product) =>
+    product.tags?.includes("promo"),
+  )
 
   return (
     <main>
@@ -22,7 +25,6 @@ export default async function Home() {
         link="/collections/best-sellers"
         title="BEST SELLERS"
         products={bestSellers}
-        isTag
       />
       <CategoriesCarousel categories={categories} />
 
@@ -30,7 +32,6 @@ export default async function Home() {
         link="/collections/promo"
         title="Nouveautés"
         products={promo}
-        isTag
       />
       {/* <PromotionBanner /> */}
       {/* <ProductsCarousel title="NOUVEAUTÉS" /> */}
@@ -38,5 +39,5 @@ export default async function Home() {
 
       {/* <SkinProfileBanner /> */}
     </main>
-  );
+  )
 }
