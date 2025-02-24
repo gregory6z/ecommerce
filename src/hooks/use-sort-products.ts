@@ -44,6 +44,7 @@ export function useSort() {
 
   const { data: products = [] } = useQuery<Product[]>({
     queryKey: ["products"],
+    staleTime: Number.POSITIVE_INFINITY,
   })
 
   const setSortOption = (option: SortOption) => {

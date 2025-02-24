@@ -1,12 +1,12 @@
-import { Button } from "@/components/ui/button";
-import { Heart, Search, User } from "lucide-react";
-import { MenuSheet } from "./menu-sheet";
-import Link from "next/link";
-import { ShoppingBagButton } from "./shopping-bag-button";
-import { SearchSheet } from "./search-sheet";
-import { DialogSearch } from "./dialog-search";
-import { TopNav } from "./top-nav";
-import { Logo } from "./logo";
+import { Button } from "@/components/ui/button"
+import { Heart, Search, User } from "lucide-react"
+import Link from "next/link"
+import { DialogSearch } from "./dialog-search"
+import { Logo } from "./logo"
+import { MenuSheet } from "./menu-sheet"
+import { SearchSheet } from "./search-sheet"
+import { ShoppingBagButton } from "./shopping-bag-button"
+import { TopNav } from "./top-nav"
 
 export default function Header() {
   return (
@@ -23,6 +23,7 @@ export default function Header() {
 
           <nav className="hidden lg:flex lg:gap-4 xl:gap-8">
             <Link
+              shallow={true}
               className="font-bold uppercase"
               href={"/collections/skin-care"}
             >
@@ -84,5 +85,5 @@ export default function Header() {
         </nav>
       </div>
     </header>
-  );
+  )
 }
