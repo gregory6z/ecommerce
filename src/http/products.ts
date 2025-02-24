@@ -23,6 +23,7 @@ export interface Product {
   tags: string[] | null
   description: string
   collection: string
+  createdAt: Date
   images: {
     url: string
     altText: string

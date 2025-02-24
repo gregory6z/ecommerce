@@ -7,6 +7,7 @@ interface ProductNode {
   handle: string
   description: string
   tags: string[]
+  createdAt: Date
   availableForSale: boolean
   totalInventory: number
   priceRange: {
@@ -75,7 +76,11 @@ interface ProductsResponse {
 export async function GET() {
   const productsQuery = `
     query Products($cursor: String) {
-      products(first: 250, after: $cursor) {
+        products(
+      first: 250, 
+      after: $cursor,
+      sortKey: RELEVANCE
+    ) {
         edges {
           node {
             id
@@ -83,6 +88,7 @@ export async function GET() {
             handle
             description
             tags
+            createdAt
             availableForSale
             totalInventory
             priceRange {
@@ -168,6 +174,7 @@ export async function GET() {
       handle: product.handle,
       tags: product.tags,
       collection: product.collections?.edges[0]?.node?.handle || "",
+      createdAt: new Date(product.createdAt),
       description: product.description,
       availableForSale: product.availableForSale,
       price: product.priceRange.minVariantPrice,
