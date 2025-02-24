@@ -5,6 +5,7 @@ import BannerCategory from "./componenets/banner-category"
 import HeaderCategory from "./componenets/header-category"
 import SearchDrawer from "./componenets/search-drawer"
 import SearchSidebar from "./componenets/search-sidebar"
+import { ProductsContainer } from "./products-container"
 
 export default async function Categories({
   params,
@@ -41,11 +42,12 @@ export default async function Categories({
         <SearchDrawer />
         <section className="flex gap-4">
           <SearchSidebar />
-          <div className=" mt-6 grid grid-cols-2 gap-2 sm:grid-cols-3 xl:grid-cols-4">
+          {/* <div className=" mt-6 grid grid-cols-2 gap-2 sm:grid-cols-3 xl:grid-cols-4">
             {products.map((product: Product) => (
               <ProductCard key={product.id} product={product} />
             ))}
-          </div>
+          </div> */}
+          <ProductsContainer filterProducts={products} />
         </section>
       </main>
     </div>
