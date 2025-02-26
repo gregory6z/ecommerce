@@ -11,7 +11,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { getAllProducts } from "@/http/get-all-products"
 import type { Product } from "@/http/products"
-import { configureMeilisearchIndex, meilisearch } from "@/lib/meilisearch"
+import { meilisearch } from "@/lib/meilisearch"
 import * as DialogPrimitive from "@radix-ui/react-dialog"
 import { Search, X } from "lucide-react"
 import { useEffect, useState } from "react"
@@ -54,11 +54,6 @@ export function DialogSearch() {
           facets: ["*"],
           showRankingScore: true,
         })
-
-        console.log("Results:", results)
-
-        const allSettings = await meilisearch.index("products").getSettings()
-        console.log("All Settings:", allSettings)
 
         const phraseSuggestions = results.hits
           .map((hit) => hit.title)
