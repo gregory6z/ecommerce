@@ -8,6 +8,17 @@ import { SearchSheet } from "./search-sheet"
 import { ShoppingBagButton } from "./shopping-bag-button"
 import { TopNav } from "./top-nav"
 
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuIndicator,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+  NavigationMenuViewport,
+} from "@/components/ui/navigation-menu"
+
 export default function Header() {
   return (
     <header className="sticky top-0 z-50 ">
@@ -22,6 +33,45 @@ export default function Header() {
           <Logo />
 
           <nav className="hidden lg:flex lg:gap-4 xl:gap-8">
+            <NavigationMenu>
+              <NavigationMenuList>
+                <NavigationMenuItem>
+                  <NavigationMenuTrigger>Soins Visage</NavigationMenuTrigger>
+                  <NavigationMenuContent>ola</NavigationMenuContent>
+                </NavigationMenuItem>
+                <NavigationMenuItem>
+                  <NavigationMenuTrigger>Soins Corps</NavigationMenuTrigger>
+                  <NavigationMenuContent>
+                    <NavigationMenuLink>Link</NavigationMenuLink>
+                  </NavigationMenuContent>
+                </NavigationMenuItem>
+                <NavigationMenuItem>
+                  <NavigationMenuTrigger>Cheveux</NavigationMenuTrigger>
+                  <NavigationMenuContent>
+                    <NavigationMenuLink>Link</NavigationMenuLink>
+                  </NavigationMenuContent>
+                </NavigationMenuItem>
+                <NavigationMenuItem>
+                  <NavigationMenuTrigger>Maquillage</NavigationMenuTrigger>
+                  <NavigationMenuContent>
+                    <NavigationMenuLink>Link</NavigationMenuLink>
+                  </NavigationMenuContent>
+                </NavigationMenuItem>
+                <NavigationMenuItem>
+                  <NavigationMenuTrigger>Parfums</NavigationMenuTrigger>
+                  <NavigationMenuContent>
+                    <NavigationMenuLink>Link</NavigationMenuLink>
+                  </NavigationMenuContent>
+                </NavigationMenuItem>
+                <NavigationMenuItem>
+                  <NavigationMenuTrigger>Collections</NavigationMenuTrigger>
+                  <NavigationMenuContent>
+                    <NavigationMenuLink>Link</NavigationMenuLink>
+                  </NavigationMenuContent>
+                </NavigationMenuItem>
+              </NavigationMenuList>
+            </NavigationMenu>
+            {/* 
             <Link
               shallow={true}
               className="font-bold uppercase"
@@ -58,7 +108,7 @@ export default function Header() {
               href={"/collections/parfums"}
             >
               Parfums
-            </Link>
+            </Link> */}
           </nav>
 
           <div className="flex items-center gap-2 lg:gap-1">
