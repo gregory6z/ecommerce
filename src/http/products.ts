@@ -121,3 +121,68 @@ export interface Product {
 //     return []
 //   }
 // }
+
+export interface Product2 {
+  // Campos originais
+  id: string
+  title: string
+  handle: string
+  tags: string[] | null
+  description: string
+  collection: string
+  createdAt: Date
+  images: {
+    url: string
+    altText: string
+  }[]
+  variants: ProductVariant[]
+  price: {
+    amount: string
+    currencyCode: string
+  }
+  compareAtPrice: {
+    amount: string
+    currencyCode: string
+  } | null
+  availableForSale: boolean
+
+  // Metafields existentes
+  details?: string
+  ingredients?: string
+  instructions?: string
+  eco_details?: string
+
+  // Novos metafields para categorização
+  product_type?: string // facial_care, body_care, hair_care, makeup, fragrance, botanical
+  subcategory?: string // Para as subcategorias como anti-age, hydratants, etc.
+
+  // Características do produto
+  skin_type?: string // dry, oily, combination, sensitive, normal, all
+  hair_type?: string // straight, wavy, curly, coily, all
+  concern?: string[] // aging, acne, dryness, etc.
+  benefits?: string[] // moisturizing, soothing, anti_aging, etc.
+  botanical_ingredient?: string[] // aloe_vera, argan, etc.
+  fragrance_family?: string // floral, woody, oriental, etc.
+  spf_level?: number
+
+  // Certificações
+  is_organic?: boolean
+  is_vegan?: boolean
+  is_cruelty_free?: boolean
+
+  // Campos calculados com base em tags ou outras propriedades
+  isBestseller?: boolean
+  isNewArrival?: boolean
+  isOnSale?: boolean
+  isLimitedEdition?: boolean
+
+  // Campos úteis para quiz de rotinas
+  routine_step?: string // cleanser, toner, serum, etc.
+  usage_time?: string[] // morning, evening, weekly
+
+  // Campos adicionais para SEO e navegação
+  searchKeywords?: string[] // Palavras-chave adicionais para pesquisa
+  relatedProducts?: string[] // IDs de produtos relacionados
+  rating?: number // Avaliação média do produto
+  reviewCount?: number // Número de avaliações
+}

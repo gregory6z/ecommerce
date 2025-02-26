@@ -1,3 +1,4 @@
+import { api } from "@/data/api"
 import { getCollections } from "@/http/collections"
 import { getAllProducts } from "@/http/get-all-products"
 import type { Product } from "@/http/products"
@@ -9,6 +10,14 @@ export default async function Home() {
   const categories = await getCollections()
 
   const products = await getAllProducts()
+
+  // const indexResponse = await api("/admin/index", {
+  //   method: "POST",
+  //   cache: "no-store",
+  // })
+
+  // const indexResult = await indexResponse.json()
+  // console.log("Indexing Result:", indexResult)
 
   const bestSellers = products.filter((product: Product) =>
     product.tags?.includes("best-sellers"),

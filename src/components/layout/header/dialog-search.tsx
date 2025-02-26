@@ -48,102 +48,34 @@ export function DialogSearch() {
         const results = await meilisearch.index("products").search(searchTerm, {
           limit: 15,
           attributesToRetrieve: ["*"],
-          attributesToSearchOn: ["title", "description", "category", "tags"],
+          attributesToSearchOn: ["title", "description", "collection", "tags"],
           matchingStrategy: "all",
           showMatchesPosition: true,
           facets: ["*"],
           showRankingScore: true,
         })
 
+        console.log("Results:", results)
+
+        const allSettings = await meilisearch.index("products").getSettings()
+        console.log("All Settings:", allSettings)
+
         const phraseSuggestions = results.hits
           .map((hit) => hit.title)
-          .slice(0, 3)
-
-        const collectionsSuggestions = results.hits
-          .map((hit) => hit.collections)
-          .filter(
-            (collection, index, self) => self.indexOf(collection) === index,
-          )
+          .filter((title) => title && title.trim() !== "")
           .slice(0, 5)
 
-        // const generateRelatedTerms = (hits: any[]) => {
-        //   const terms = new Set<string>()
+        const collectionsSuggestions = results.hits
+          .map((hit) => hit.collection)
+          .filter(
+            (collection, index, self) =>
+              collection &&
+              collection.trim() !== "" &&
+              self.indexOf(collection) === index,
+          )
+          .slice(0, 3)
 
-        //   hits.forEach((hit) => {
-        //     const text =
-        //       `${hit.title} ${hit.description} ${hit.category} ${hit.tags?.join(" ") || ""}`.toLowerCase()
-        //     const words = text.split(/\s+/).filter(Boolean)
-
-        //     words.forEach((word) => {
-        //       if (word.includes(searchTerm.toLowerCase())) {
-        //         terms.add(word)
-        //       }
-        //     })
-
-        //     // Cria combinações de 2-3 palavras
-        //     for (let i = 0; i < words.length; i++) {
-        //       // Combinações de duas palavras
-        //       if (words[i + 1]) {
-        //         const twoWords = `${words[i]} ${words[i + 1]}`
-        //         if (twoWords.includes(searchTerm.toLowerCase())) {
-        //           terms.add(twoWords)
-        //         }
-        //       }
-
-        //       // Combinações de três palavras
-        //       if (words[i + 1] && words[i + 2]) {
-        //         const threeWords = `${words[i]} ${words[i + 1]} ${words[i + 2]}`
-        //         if (threeWords.includes(searchTerm.toLowerCase())) {
-        //           terms.add(threeWords)
-        //         }
-        //       }
-        //     }
-
-        //     // Adiciona frases comuns do domínio se relacionadas ao termo
-        //     const commonPhrases = [
-        //       `${searchTerm} treatment`,
-        //       `${searchTerm} cream`,
-        //       `${searchTerm} serum`,
-        //       `${searchTerm} lotion`,
-        //       `${searchTerm} routine`,
-        //       `${searchTerm} solution`,
-        //       `anti ${searchTerm}`,
-        //       `${searchTerm} care`,
-        //     ]
-
-        //     commonPhrases.forEach((phrase) => {
-        //       if (text.includes(phrase.toLowerCase())) {
-        //         terms.add(phrase)
-        //       }
-        //     })
-        //   })
-
-        //   return Array.from(terms)
-        // }
-
-        // Gera e filtra sugestões
-        // const allSuggestions = generateRelatedTerms(results.hits)
-        // const filteredSuggestions = allSuggestions
-        //   .filter(
-        //     (suggestion) =>
-        //       suggestion.toLowerCase().includes(searchTerm.toLowerCase()) &&
-        //       suggestion.length > searchTerm.length,
-        //   )
-        //   .sort((a, b) => {
-        //     // Prioriza sugestões que começam com o termo de busca
-        //     const aStartsWith = a
-        //       .toLowerCase()
-        //       .startsWith(searchTerm.toLowerCase())
-        //     const bStartsWith = b
-        //       .toLowerCase()
-        //       .startsWith(searchTerm.toLowerCase())
-        //     if (aStartsWith && !bStartsWith) return -1
-        //     if (!aStartsWith && bStartsWith) return 1
-        //     return a.length - b.length
-        //   })
-        //   .slice(0, 6) // Limita a 6 sugestões
-
-        setSuggestions([...phraseSuggestions, ...collectionsSuggestions])
+        setSuggestions([...collectionsSuggestions, ...phraseSuggestions])
 
         const allProducts = await getAllProducts()
         const hitIds = results.hits.map(
