@@ -1,11 +1,11 @@
 import { ProductCard } from "@/components/product/product-card"
 import { getAllProducts } from "@/http/get-all-products"
 import type { Product } from "@/http/products"
-import BannerCategory from "./componenets/banner-category"
-import HeaderCategory from "./componenets/header-category"
-import SearchDrawer from "./componenets/search-drawer"
-import SearchSidebar from "./componenets/search-sidebar"
-import { ProductsContainer } from "./products-container"
+import BannerCategory from "./components/banner-category"
+import HeaderCategory from "./components/header-category"
+import { ProductsContainer } from "./components/products-container"
+import SearchDrawer from "./components/search-drawer"
+import SearchSidebar from "./components/search-sidebar"
 
 export default async function Categories({
   params,

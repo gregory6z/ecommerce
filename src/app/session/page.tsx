@@ -1,22 +1,17 @@
-import {
-  AppleIcon,
-  FacebookIcon,
-  GoogleIcon,
-  MicrosoftIcon,
-} from "@/assets/social-icons";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import Image from "next/image";
-import { ButtonSignin } from "./components/button-signin";
-import { auth } from "@/lib/auth";
-import { redirect } from "next/navigation";
+import { AppleIcon, FacebookIcon, MicrosoftIcon } from "@/assets/social-icons"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { auth } from "@/lib/auth"
+import Image from "next/image"
+import { redirect } from "next/navigation"
+import { ButtonSignin } from "./components/button-signin"
 
 export default async function Session() {
-  const session = await auth();
+  const session = await auth()
 
   if (session) {
-    redirect("/account");
+    redirect("/account")
   }
 
   return (
@@ -64,5 +59,5 @@ export default async function Session() {
         </Button>
       </div>
     </div>
-  );
+  )
 }

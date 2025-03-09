@@ -1,47 +1,44 @@
-// types/cart.ts
+import type { Product } from "@/http/products"
 
-import type { Product } from "@/http/products";
-
-// Item individual do carrinho que estende Product
 export interface CartItem extends Product {
-  cartId: string; // ID do carrinho inteiro
-  lineId: string; // ID único da linha no carrinho
-  quantity: number; // Quantidade do item
-  quantityAvailable: number; // Adicionado aqui
-  variantId: string; // ID da variante selecionada
-  id: string;
+  cartId: string // ID do carrinho inteiro
+  lineId: string // ID único da linha no carrinho
+  quantity: number // Quantidade do item
+  quantityAvailable: number // Adicionado aqui
+  variantId: string // ID da variante selecionada
+  id: string
   image: {
-    url: string;
-    altText: string;
-  };
+    url: string
+    altText: string
+  }
 }
 
 // Resposta completa do carrinho
 export interface CartResponse {
-  cartId: string;
-  items: CartItem[];
+  cartId: string
+  items: CartItem[]
   total: {
-    amount: string;
-    currencyCode: string;
-  };
+    amount: string
+    currencyCode: string
+  }
 }
 
 // Para usar com react-query
 export interface UseCartResponse {
-  cart: CartResponse | null;
-  isLoading: boolean;
-  isError: boolean;
-  error: Error | null;
+  cart: CartResponse | null
+  isLoading: boolean
+  isError: boolean
+  error: Error | null
 }
 
 // Para mutations
 export interface AddToCartInput {
-  variantId: string;
-  quantity: number;
+  variantId: string
+  quantity: number
 }
 
 // Para erros específicos do carrinho
 export interface CartError {
-  code: string;
-  message: string;
+  code: string
+  message: string
 }

@@ -1,4 +1,4 @@
-import { AccordionFilters } from "./accordeon-filters";
+import { AccordionFilters } from "./accordeon-filters"
 
 export default function SearchSidebar() {
   return (
@@ -8,5 +8,5 @@ export default function SearchSidebar() {
         <AccordionFilters />
       </div>
     </div>
-  );
+  )
 }

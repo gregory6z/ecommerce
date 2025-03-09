@@ -2,7 +2,7 @@ import { api } from "@/data/api"
 import { getCollections } from "@/http/collections"
 import { getAllProducts } from "@/http/get-all-products"
 import type { Product } from "@/http/products"
-import CategoriesCarousel from "./components/carousels/categories-carousel"
+import CategoriesCarousel from "./components/categories-carousel"
 import HeroBanner from "./components/hero-banner"
 import ProductsCarousel from "./components/products-carousel"
 

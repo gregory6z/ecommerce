@@ -1,8 +1,8 @@
 import { auth } from "@/lib/auth"
 import { redirect } from "next/navigation"
-import { UserContent } from "./user-content"
 
 import Image from "next/image"
+import { UserContent } from "./components/user-content"
 
 export default async function Account() {
   const session = await auth()
