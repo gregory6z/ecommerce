@@ -18,6 +18,7 @@ import {
   NavigationMenuTrigger,
   NavigationMenuViewport,
 } from "@/components/ui/navigation-menu"
+import { HeaderNavigationMenuContent } from "./header-navigation-menu-content"
 
 export default function Header() {
   return (
@@ -37,12 +38,14 @@ export default function Header() {
               <NavigationMenuList>
                 <NavigationMenuItem>
                   <NavigationMenuTrigger>Soins Visage</NavigationMenuTrigger>
-                  <NavigationMenuContent>ola</NavigationMenuContent>
+                  <NavigationMenuContent>
+                    <HeaderNavigationMenuContent />
+                  </NavigationMenuContent>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
                   <NavigationMenuTrigger>Soins Corps</NavigationMenuTrigger>
                   <NavigationMenuContent>
-                    <NavigationMenuLink>Link</NavigationMenuLink>
+                    <HeaderNavigationMenuContent />
                   </NavigationMenuContent>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
