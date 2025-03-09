@@ -1,4 +1,5 @@
 import { ProductCard } from "@/components/product/product-card"
+import { NavigationMenuLink } from "@/components/ui/navigation-menu"
 import { getAllProducts } from "@/http/get-all-products"
 import Link from "next/link"
 
@@ -21,21 +22,25 @@ export async function HeaderNavigationMenuContent() {
       <div className="w-[340px] space-y-2">
         <div className="space-y-3">
           {skinCareSubcategories.map((subcategory) => (
-            <Link
-              key={subcategory.id}
-              href={`/collections/soins-du-visage/${subcategory.slug}`}
-              className="block cursor-pointer rounded-md px-1 py-2 transition-colors hover:bg-gray-50"
-            >
-              <p className="font-medium text-lg hover:text-primary">
-                {subcategory.name}
-              </p>
-            </Link>
+            <NavigationMenuLink asChild key={subcategory.id}>
+              <Link
+                key={subcategory.id}
+                href={`/collections/${subcategory.slug}`}
+                className="block cursor-pointer rounded-md px-1 py-2 transition-colors hover:bg-gray-100"
+              >
+                <p className="font-medium text-lg hover:text-primary">
+                  {subcategory.name}
+                </p>
+              </Link>
+            </NavigationMenuLink>
           ))}
         </div>{" "}
       </div>
       <div className="grid grid-cols-4 gap-4 pl-8">
         {featuredProducts.map((product: any) => (
-          <ProductCard key={product.id} product={product} />
+          <NavigationMenuLink asChild key={product.id}>
+            <ProductCard product={product} />
+          </NavigationMenuLink>
         ))}
       </div>
     </div>

@@ -14,6 +14,7 @@ import type { Product } from "@/http/products"
 import { meilisearch } from "@/lib/meilisearch"
 import * as DialogPrimitive from "@radix-ui/react-dialog"
 import { Search, X } from "lucide-react"
+import { usePathname } from "next/navigation"
 import { useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
@@ -33,8 +34,16 @@ export function DialogSearch() {
   const [suggestions, setSuggestions] = useState<string[]>([])
   const [open, setOpen] = useState(false)
 
+  const pathname = usePathname()
+
   const { register, watch, setValue } = useForm<SearchFormData>()
   const searchTerm = watch("searchTerm")
+
+  useEffect(() => {
+    if (open) {
+      setOpen(false)
+    }
+  }, [pathname])
 
   useEffect(() => {
     const fetchSuggestionsAndProducts = async () => {

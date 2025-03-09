@@ -11,13 +11,12 @@ import { TopNav } from "./top-nav"
 import {
   NavigationMenu,
   NavigationMenuContent,
-  NavigationMenuIndicator,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
-  NavigationMenuViewport,
 } from "@/components/ui/navigation-menu"
+import { HeaderNavigationMenu } from "./header-navigation-menu"
 import { HeaderNavigationMenuContent } from "./header-navigation-menu-content"
 
 export default function Header() {
@@ -33,86 +32,7 @@ export default function Header() {
 
           <Logo />
 
-          <nav className="hidden lg:flex lg:gap-4 xl:gap-8">
-            <NavigationMenu>
-              <NavigationMenuList>
-                <NavigationMenuItem>
-                  <NavigationMenuTrigger>Soins Visage</NavigationMenuTrigger>
-                  <NavigationMenuContent>
-                    <HeaderNavigationMenuContent />
-                  </NavigationMenuContent>
-                </NavigationMenuItem>
-                <NavigationMenuItem>
-                  <NavigationMenuTrigger>Soins Corps</NavigationMenuTrigger>
-                  <NavigationMenuContent>
-                    <HeaderNavigationMenuContent />
-                  </NavigationMenuContent>
-                </NavigationMenuItem>
-                <NavigationMenuItem>
-                  <NavigationMenuTrigger>Cheveux</NavigationMenuTrigger>
-                  <NavigationMenuContent>
-                    <NavigationMenuLink>Link</NavigationMenuLink>
-                  </NavigationMenuContent>
-                </NavigationMenuItem>
-                <NavigationMenuItem>
-                  <NavigationMenuTrigger>Maquillage</NavigationMenuTrigger>
-                  <NavigationMenuContent>
-                    <NavigationMenuLink>Link</NavigationMenuLink>
-                  </NavigationMenuContent>
-                </NavigationMenuItem>
-                <NavigationMenuItem>
-                  <NavigationMenuTrigger>Parfums</NavigationMenuTrigger>
-                  <NavigationMenuContent>
-                    <NavigationMenuLink>Link</NavigationMenuLink>
-                  </NavigationMenuContent>
-                </NavigationMenuItem>
-                <NavigationMenuItem>
-                  <NavigationMenuTrigger>Collections</NavigationMenuTrigger>
-                  <NavigationMenuContent>
-                    <NavigationMenuLink>Link</NavigationMenuLink>
-                  </NavigationMenuContent>
-                </NavigationMenuItem>
-              </NavigationMenuList>
-            </NavigationMenu>
-            {/* 
-            <Link
-              shallow={true}
-              className="font-bold uppercase"
-              href={"/collections/skin-care"}
-            >
-              Skin care
-            </Link>
-            <Link
-              className="font-bold uppercase"
-              href={"/collections/anti-age"}
-            >
-              Anti-age
-            </Link>
-            <Link
-              className="font-bold uppercase"
-              href={"/collections/hydratants"}
-            >
-              Hydratants
-            </Link>
-            <Link
-              className="font-bold uppercase"
-              href={"/collections/anti-acne"}
-            >
-              Anti-acne
-            </Link>
-            <Link
-              className="font-bold uppercase"
-              href={"/collections/maquillage"}
-            >
-              Maquillage
-            </Link>
-            <Link
-              className="font-bold uppercase lg:hidden xl:block"
-              href={"/collections/parfums"}
-            >
-              Parfums
-            </Link> */}
-          </nav>
+          <HeaderNavigationMenu />
 
           <div className="flex items-center gap-2 lg:gap-1">
             <DialogSearch />
